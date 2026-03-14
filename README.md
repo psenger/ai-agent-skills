@@ -27,6 +27,7 @@ Think of it as a playbook: you define the process once, and the agent follows it
 | Skill | Type | Description |
 |---|---|---|
 | **[vault-scribe](skills/vault-scribe/)** | `/vault-scribe` | Converts transcripts, meeting notes, brainstorming sessions, strategy docs, and rough notes into polished Obsidian vault Markdown — GitHub-compatible by default, with type-aware frontmatter schemas |
+| **[agentic-skeleton-dir-structure](skills/agentic-skeleton-dir-structure/)** | `/agentic-skeleton-dir-structure` | Scaffolds production-ready directory structures for agentic AI projects using Agent-OS v3 (Builder Methods) — supports single repos, mono-repos, multi-language repos, any platform, any language |
 
 ### vault-scribe
 
@@ -64,6 +65,49 @@ vault-scribe/
     └── transcript-example.md         Article with transcript appendix
 ```
 
+### agentic-skeleton-dir-structure
+
+Your project scaffolding assistant. Interactively builds production-ready directory structures for agentic AI projects, with [Agent-OS v3](https://github.com/buildermethods/agent-os) by Builder Methods and [Spec-Driven Development (SDD)](https://buildermethods.com/library/spec-driven-development-claude-code) baked in.
+
+**How it works:**
+
+1. **Detects context** — checks if the current directory already has files and warns you before overwriting anything
+2. **Asks 6 questions** (one at a time) — repo pattern, platform type, languages, IaC tool, target platform, agent tooling
+3. **Shows a summary table** and waits for your confirmation before creating anything
+4. **Scaffolds everything** — directories, `CLAUDE.md`, `.claude/` config, `agent-os/` structure, IaC layout, seed files
+5. **Guides next steps** — Agent-OS installation, `/plan-product`, and the SDD workflow loop
+
+**Supports any combination of:**
+
+| Dimension | Options |
+|---|---|
+| Repo pattern | Single Repo, Mono-Repo, Multi-Language Mono-Repo |
+| Platform | Frontend, Backend, Full-Stack, Middleware, Agents/AI |
+| Language | TypeScript, Python, Go, Java, Rust, Ruby, C#, and more |
+| IaC | Terraform, Pulumi, CDK, Bicep, CloudFormation, Helm, Ansible |
+
+**What gets created:**
+
+- `CLAUDE.md` — project instructions loaded every Claude Code session
+- `.claude/` — agents, skills, commands, hooks directories
+- `agent-os/` — standards, specs, product context (mission, roadmap, tech stack)
+- `src/` or `apps/` + `packages/` — language-specific source layout
+- `iac/` — IaC structure matching your chosen tool
+- `deploy/` — CI/CD pipelines, Docker, deploy scripts
+- `docs/` — architecture decision records, API docs, runbooks
+
+```
+agentic-skeleton-dir-structure/
+├── SKILL.md                          Interactive workflow + quality checklist
+├── references/
+│   ├── repo-patterns.md              Language + platform source layouts (7 languages)
+│   ├── iac-patterns.md               IaC by tool (7 tools) + CI/CD + env promotion
+│   └── agent-os-guide.md             Agent-OS install, SDD methodology, commands
+└── examples/
+    ├── single-repo-typescript.md     Completed single repo TypeScript API scaffold
+    └── mono-repo-fullstack.md        Completed mono-repo full-stack scaffold
+```
+
 ---
 
 ## Installation
@@ -74,6 +118,12 @@ Install all skills:
 
 ```bash
 npx skills add psenger/ai-agent-skills
+```
+
+List all available skills:
+
+```bash
+npx skills list psenger/ai-agent-skills
 ```
 
 Install a specific skill:
@@ -118,6 +168,8 @@ cp -r skills/vault-scribe .claude/skills/vault-scribe
 
 Once installed, skills activate automatically based on your request. You can also invoke them directly:
 
+### vault-scribe
+
 ```
 /vault-scribe article
 /vault-scribe meeting
@@ -126,14 +178,33 @@ Once installed, skills activate automatically based on your request. You can als
 /vault-scribe deep-research
 ```
 
-Or just describe what you need — the skill triggers on context:
+Or describe what you need — the skill triggers on context:
 
 ```
 "Turn this transcript into an Obsidian note"
 "Write up meeting notes from today's standup"
-"Help me brainstorm caching strategies"
 "Create a strategy doc for the Q3 roadmap"
 ```
+
+### agentic-skeleton-dir-structure
+
+```
+/agentic-skeleton-dir-structure
+/agentic-skeleton-dir-structure single
+/agentic-skeleton-dir-structure mono
+/agentic-skeleton-dir-structure multi-lang
+```
+
+Or describe what you need — the skill triggers on context:
+
+```
+"Set up a new project for an agentic AI service"
+"Scaffold a mono-repo for my full-stack TypeScript app"
+"Create a directory structure for this project"
+"Initialize an Agent-OS project layout"
+```
+
+Pass a repo pattern as an argument to skip the first question. Without arguments, the skill walks you through all six questions interactively.
 
 ---
 
