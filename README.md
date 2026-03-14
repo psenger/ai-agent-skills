@@ -28,6 +28,7 @@ Think of it as a playbook: you define the process once, and the agent follows it
 |---|---|---|
 | **[vault-scribe](skills/vault-scribe/)** | `/vault-scribe` | Converts transcripts, meeting notes, brainstorming sessions, strategy docs, and rough notes into polished Obsidian vault Markdown — GitHub-compatible by default, with type-aware frontmatter schemas |
 | **[agentic-skeleton-dir-structure](skills/agentic-skeleton-dir-structure/)** | `/agentic-skeleton-dir-structure` | Scaffolds production-ready directory structures for agentic AI projects using Agent-OS v3 (Builder Methods) — supports single repos, mono-repos, multi-language repos, any platform, any language |
+| **[git-commit-pr-message](skills/git-commit-pr-message/)** | `/git-commit-pr-message` | Generates Conventional Commits messages, PR titles/descriptions, and Keep a Changelog v1.1.0 entries — with sensitive content scanning, GitHub/Jira ticket linking, and release workflow |
 
 ### vault-scribe
 
@@ -106,6 +107,35 @@ agentic-skeleton-dir-structure/
 └── examples/
     ├── single-repo-typescript.md     Completed single repo TypeScript API scaffold
     └── mono-repo-fullstack.md        Completed mono-repo full-stack scaffold
+```
+
+### git-commit-pr-message
+
+Your commit and PR workflow assistant. Generates professional git commit messages, pull request titles and descriptions, changelog entries, and handles releases — all following industry-standard conventions.
+
+**What it does:**
+
+1. **Scans for sensitive content** (API keys, tokens, passwords, private keys) — mandatory gate before any commit
+2. **Asks for ticket references** — supports GitHub Issues (all 9 closing keywords) and Jira (pattern-matched ticket keys)
+3. **Generates commit messages** — Conventional Commits format with type, scope, subject, body, and footer
+4. **Updates CHANGELOG.md** — Keep a Changelog v1.1.0 with all six section types (Added, Changed, Deprecated, Removed, Fixed, Security)
+5. **Creates pull requests** — via `gh` CLI or GitHub MCP, with summary, ticket links, changes, and test plan
+6. **Cuts releases** — renames Unreleased to versioned section, adds comparison links, optionally creates git tags
+
+**Key features:**
+- Conventional Commits with type, scope, and imperative mood enforcement
+- All 9 GitHub closing keywords (`close/closes/closed`, `fix/fixes/fixed`, `resolve/resolves/resolved`)
+- Jira ticket key detection by pattern (`PROJ-1234`) — no prefix needed
+- Keep a Changelog v1.1.0 with comparison links at bottom of file
+- Sensitive content scanning with line-level reporting
+- User confirmation gates — never commits, pushes, or creates PRs without asking
+- Skills v2.0 compliant with `disable-model-invocation`, `allowed-tools`, `argument-hint`
+
+```
+git-commit-pr-message/
+├── SKILL.md                          Workflow (9 steps) + behavioural rules
+└── references/
+    └── examples.md                   Commit, PR, changelog, ticket, and scan examples
 ```
 
 ---
@@ -205,6 +235,26 @@ Or describe what you need — the skill triggers on context:
 ```
 
 Pass a repo pattern as an argument to skip the first question. Without arguments, the skill walks you through all six questions interactively.
+
+### git-commit-pr-message
+
+```
+/git-commit-pr-message commit
+/git-commit-pr-message pr
+/git-commit-pr-message changelog
+/git-commit-pr-message release
+```
+
+Or describe what you need — the skill triggers on context:
+
+```
+"Commit these changes"
+"Create a PR for this branch"
+"Update the changelog"
+"Cut a release for v1.2.0"
+```
+
+Note: This skill has `disable-model-invocation: true`, so it will only activate when you explicitly invoke it — it will never auto-trigger during normal conversation.
 
 ---
 

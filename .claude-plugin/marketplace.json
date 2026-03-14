@@ -9,6 +9,12 @@
       "source": "./skills/vault-scribe",
       "description": "Create, edit, and organise Obsidian vault notes with GitHub-compatible Markdown and type-aware frontmatter",
       "version": "1.0.0"
+    },
+    {
+      "name": "git-commit-pr-message",
+      "source": "./skills/git-commit-pr-message",
+      "description": "Generate Conventional Commits messages, PR descriptions, Keep a Changelog entries, and release workflows with sensitive content scanning",
+      "version": "1.0.0"
     }
   ]
 }
