@@ -1,0 +1,14 @@
+{
+  "name": "psenger-skills-marketplace",
+  "owner": {
+    "name": "Philip A Senger"
+  },
+  "plugins": [
+    {
+      "name": "vault-scribe",
+      "source": "./skills/vault-scribe",
+      "description": "Create, edit, and organise Obsidian vault notes with GitHub-compatible Markdown and type-aware frontmatter",
+      "version": "1.0.0"
+    }
+  ]
+}

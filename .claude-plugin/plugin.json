@@ -1,0 +1,10 @@
+{
+  "name": "psenger-skills",
+  "description": "A personal collection of reusable AI agent skills for Obsidian, planning, brainstorming, and vault management",
+  "version": "1.0.0",
+  "author": {
+    "name": "Philip A Senger"
+  },
+  "repository": "https://github.com/psenger/ai-agent-skills",
+  "license": "MIT"
+}
