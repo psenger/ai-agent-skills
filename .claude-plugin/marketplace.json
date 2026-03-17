@@ -21,6 +21,12 @@
       "source": "./skills/design-critique",
       "description": "Structured design critique and plan stress-testing. Acts as a relentless interviewer drawing on pre-mortem, red teaming, and ATAM techniques to help someone think through a design or plan exhaustively. Use when the user says \"grill me\", \"critique this\", \"stress-test this\", \"pre-mortem\", \"red team this\", or asks to be challenged on a technical architecture, product plan, feature design, or any decision rather than validated.",
       "version": "1.0.0"
+    },
+    {
+      "name": "arch-lens",
+      "source": "./skills/arch-lens",
+      "description": "Explores a codebase for architectural friction through the lens of Ousterhout's deep-module principle (small interface, large implementation). Seven-step interactive workflow: an Explore sub-agent navigates the codebase organically — the friction it experiences IS the signal. Surfaces candidate clusters with coupling reasons, call patterns, shared types, dependency categories, and existing tests that a boundary test would replace. User picks what to explore, frames the problem, then 3–4 parallel sub-agents design competing deep-module interfaces. Chosen design becomes a structured RFC action file readable by GitHub MCP or ROVO (Jira) MCP. Use when the user says \"arch review\", \"find shallow modules\", \"module depth\", \"deep module\", \"Ousterhout\", \"testability audit\", \"surface coupling\", \"design interfaces\", \"RFC issues\", or \"architectural friction\".",
+      "version": "1.0.0"
     }
   ]
 }
