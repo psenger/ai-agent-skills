@@ -107,7 +107,15 @@ mkdir -p ~/.claude/skills/my-skill
 
 For directory trees, use plain `text` or no language tag.
 
-### 6. Tables & Links
+### 6. Table of Contents
+
+**Never use `[TOC]`, `[[_TOC_]]`, or any other TOC directive** — neither GitHub nor Obsidian supports them natively. They render as broken plain text.
+
+- GitHub auto-generates a TOC in the sidebar — no directive needed.
+- Obsidian generates one via its built-in plugin — no directive needed.
+- Only add a **manual** TOC (using standard anchor links) when the document has 6+ sections and will be read outside a browser. See `references/MARKDOWN-SYNTAX.md` for anchor rules and an example.
+
+### 7. Tables & Links
 
 Use Markdown tables for comparisons, option lists, and reference links. Always include a reference links table at the end:
 
@@ -118,7 +126,7 @@ Use Markdown tables for comparisons, option lists, and reference links. Always i
 | Source Video  | [youtube.com/watch?v=...](https://youtube.com/watch?v=...) |
 ```
 
-### 7. Inline Formatting Rules
+### 8. Inline Formatting Rules
 
 | Element | Usage |
 |---|---|
@@ -127,7 +135,7 @@ Use Markdown tables for comparisons, option lists, and reference links. Always i
 | `` `code` `` | All file paths, commands, config keys, code symbols |
 | `[[wikilink]]` | Internal Obsidian links (only if Obsidian-only context) |
 
-### 8. Transcript Appendix
+### 9. Transcript Appendix
 
 When the source material includes a transcript (video, podcast, meeting recording, article), **always** append the raw transcript at the very end of the document, after all other content, using this exact format:
 
