@@ -29,6 +29,7 @@ Think of it as a playbook: you define the process once, and the agent follows it
 | **[vault-scribe](skills/vault-scribe/)** | `/vault-scribe` | Converts transcripts, meeting notes, brainstorming sessions, strategy docs, and rough notes into polished Obsidian vault Markdown — GitHub-compatible by default, with type-aware frontmatter schemas |
 | **[agentic-skeleton-dir-structure](skills/agentic-skeleton-dir-structure/)** | `/agentic-skeleton-dir-structure` | Scaffolds production-ready directory structures for agentic AI projects using Agent-OS v3 (Builder Methods) — supports single repos, mono-repos, multi-language repos, any platform, any language |
 | **[git-commit-pr-message](skills/git-commit-pr-message/)** | `/git-commit-pr-message` | Generates Conventional Commits messages, PR titles/descriptions, and Keep a Changelog v1.1.0 entries — with sensitive content scanning, GitHub/Jira ticket linking, and release workflow |
+| **[design-critique](skills/design-critique/)** | `/design-critique` | Structured design critique and plan stress-testing — acts as a relentless interviewer using pre-mortem, red teaming, and ATAM techniques to challenge technical architectures, product plans, and feature designs exhaustively |
 
 ### vault-scribe
 
@@ -136,6 +137,36 @@ git-commit-pr-message/
 ├── SKILL.md                          Workflow (9 steps) + behavioural rules
 └── references/
     └── examples.md                   Commit, PR, changelog, ticket, and scan examples
+```
+
+### design-critique
+
+Your design review sparring partner. Stress-tests technical architectures, product plans, and feature designs using structured interviewing techniques drawn from pre-mortem analysis, red teaming, and ATAM (Architecture Tradeoff Analysis Method).
+
+**What it does:**
+
+1. **Orients silently** — explores the codebase or relevant files before asking anything
+2. **Anchors the session** — establishes scope with a single opening question
+3. **Drills relentlessly** — one question at a time, following the highest-risk thread first
+4. **Surfaces hidden assumptions** — names what's unstated and forces trade-off articulation
+5. **Closes with a summary** — what held up, what didn't, and what needs resolution before proceeding
+
+**Question patterns it uses:**
+
+| Pattern | Purpose |
+|---|---|
+| What happens when X fails? | Failure modes |
+| What does the alternative look like? | Trade-off articulation |
+| How would you know if this is wrong? | Falsifiability |
+| What's the cost of reversing this? | Reversibility |
+| Walk me through the worst case | Pre-mortem |
+| What quality attribute does this sacrifice? | ATAM tradeoff probe |
+
+**Skills 2.0:** `allowed-tools: Read Grep Glob` — `argument-hint: [topic, file, or artifact to critique]` — auto-invokes on trigger phrases; no external tools required
+
+```
+design-critique/
+└── SKILL.md                          Interviewing principles, question patterns, session flow
 ```
 
 ---
