@@ -15,6 +15,12 @@
       "source": "./skills/git-commit-pr-message",
       "description": "Generate Conventional Commits messages, PR descriptions, Keep a Changelog entries, and release workflows with sensitive content scanning",
       "version": "1.0.0"
+    },
+    {
+      "name": "design-critique",
+      "source": "./skills/design-critique",
+      "description": "Structured design critique and plan stress-testing. Acts as a relentless interviewer drawing on pre-mortem, red teaming, and ATAM techniques to help someone think through a design or plan exhaustively. Use when the user says \"grill me\", \"critique this\", \"stress-test this\", \"pre-mortem\", \"red team this\", or asks to be challenged on a technical architecture, product plan, feature design, or any decision rather than validated.",
+      "version": "1.0.0"
     }
   ]
 }
