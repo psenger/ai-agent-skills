@@ -29,6 +29,7 @@ Think of it as a playbook: you define the process once, and the agent follows it
 | **[vault-scribe](skills/vault-scribe/)** | `/vault-scribe` | Converts transcripts, meeting notes, brainstorming sessions, strategy docs, and rough notes into polished Obsidian vault Markdown — GitHub-compatible by default, with type-aware frontmatter schemas |
 | **[agentic-skeleton-dir-structure](skills/agentic-skeleton-dir-structure/)** | `/agentic-skeleton-dir-structure` | Scaffolds production-ready directory structures for agentic AI projects using Agent-OS v3 (Builder Methods) — supports single repos, mono-repos, multi-language repos, any platform, any language |
 | **[git-commit-pr-message](skills/git-commit-pr-message/)** | `/git-commit-pr-message` | Generates Conventional Commits messages, PR titles/descriptions, and Keep a Changelog v1.1.0 entries — with sensitive content scanning, GitHub/Jira ticket linking, and release workflow |
+| **[design-critique](skills/design-critique/)** | `/design-critique` | Structured design critique and plan stress-testing — acts as a relentless interviewer using pre-mortem, red teaming, and ATAM techniques to challenge technical architectures, product plans, and feature designs exhaustively |
 | **[arch-lens](skills/arch-lens/)** | `/arch-lens` | Seven-step interactive architectural review anchored in Ousterhout's deep-module principle — explores a codebase for shallow modules, hidden coupling, and testability seams, spawns parallel sub-agents to design competing interfaces, then writes a structured RFC action file readable by GitHub MCP or ROVO (Jira) MCP |
 
 ### vault-scribe
@@ -139,6 +140,36 @@ git-commit-pr-message/
     └── examples.md                   Commit, PR, changelog, ticket, and scan examples
 ```
 
+### design-critique
+
+Your design review sparring partner. Stress-tests technical architectures, product plans, and feature designs using structured interviewing techniques drawn from pre-mortem analysis, red teaming, and ATAM (Architecture Tradeoff Analysis Method).
+
+**What it does:**
+
+1. **Orients silently** — explores the codebase or relevant files before asking anything
+2. **Anchors the session** — establishes scope with a single opening question
+3. **Drills relentlessly** — one question at a time, following the highest-risk thread first
+4. **Surfaces hidden assumptions** — names what's unstated and forces trade-off articulation
+5. **Closes with a summary** — what held up, what didn't, and what needs resolution before proceeding
+
+**Question patterns it uses:**
+
+| Pattern | Purpose |
+|---|---|
+| What happens when X fails? | Failure modes |
+| What does the alternative look like? | Trade-off articulation |
+| How would you know if this is wrong? | Falsifiability |
+| What's the cost of reversing this? | Reversibility |
+| Walk me through the worst case | Pre-mortem |
+| What quality attribute does this sacrifice? | ATAM tradeoff probe |
+
+**Skills 2.0:** `allowed-tools: Read Grep Glob` — `argument-hint: [topic, file, or artifact to critique]` — auto-invokes on trigger phrases; no external tools required
+
+```
+design-critique/
+└── SKILL.md                          Interviewing principles, question patterns, session flow
+```
+
 ### arch-lens
 
 Your architectural review assistant. Analyses a codebase through the lens of Ousterhout's deep-module principle — a deep module has a small interface hiding a large implementation, making it testable at the boundary and navigable by AI without reading internals.
@@ -147,15 +178,15 @@ Detection is organic, not mechanical: an Explore sub-agent navigates the codebas
 
 **What it does:**
 
-1. **Explores organically** — spawns an Explore sub-agent that navigates naturally, recording friction: concept scatter, shallow interfaces, unreachable test seams, hidden orchestration, and integration risk
-2. **Presents candidate clusters** — groups friction into named clusters with: modules involved, coupling reason, call patterns, shared types, dependency category, and existing tests a boundary test would replace
+1. **Explores organically** — spawns an Explore sub-agent that navigates the codebase naturally, recording friction: concept scatter, shallow interfaces, unreachable test seams, hidden orchestration, and integration risk at module boundaries
+2. **Presents candidate clusters** — groups friction observations into named clusters, each with: modules involved, coupling reason, co-owners, call patterns, shared types, dependency category, and existing tests that a boundary test would replace
 3. **Asks what to explore** — single open question; user picks a cluster and directs the angle
-4. **Frames the problem space** — principle violated, current interface, dependency category, blast radius, and what tests currently have to reach through to exercise the behaviour
-5. **Spawns parallel sub-agents** — 3–4 agents in parallel, each given an independent technical brief and a distinct design constraint
-6. **Presents designs and recommends** — interface signature, usage example, hidden complexity, dependency strategy, and trade-offs per design; compared in a table; followed by a strong opinionated recommendation
-7. **Writes an RFC action file** — `arch-rfcs-YYYY-MM-DD.md` at the project root; structured for direct consumption by GitHub MCP or ROVO (Jira) MCP
+4. **Frames the problem space** — principle violated, current interface, dependency category confirmed, blast radius, and what tests currently have to reach through to exercise the behaviour
+5. **Spawns parallel sub-agents** — 3–4 agents in parallel, each given an independent technical brief and a distinct design constraint (minimise, maximise flexibility, optimise for common caller, ports & adapters)
+6. **Presents designs and recommends** — interface signature, usage example, hidden complexity, dependency strategy, and trade-offs per design; compared in a table and prose; followed by a strong opinionated recommendation or named hybrid
+7. **Writes an RFC action file** — `arch-rfcs-YYYY-MM-DD.md` at the project root; one RFC per finding with Problem, Proposed Interface, Dependency Strategy, Testing Strategy, and Implementation Recommendations — structured for direct consumption by GitHub MCP or ROVO (Jira) MCP
 
-**Dependency categories:**
+**Dependency categories** — every candidate cluster is classified into one of four categories that determine the testing strategy:
 
 | Category | What it means | Testing approach |
 |---|---|---|
@@ -164,19 +195,28 @@ Detection is organic, not mechanical: an Explore sub-agent navigates the codebas
 | Remote but owned | Your services across a network boundary | Ports & adapters — in-memory adapter for tests |
 | True external | Third-party services you don't control | Mock at the boundary |
 
-**Skills 2.0:** `allowed-tools: Read Grep Glob Write Bash(git *)` — `argument-hint: [path/to/scope]` — requires `git` for churn analysis
+**Testing strategy** — replace, don't layer. Old unit tests on shallow modules become waste once boundary tests exist — delete them. New tests assert on observable outcomes through the public interface, not internal state.
+
+**Sub-agent design constraints:**
+
+| Agent | Constraint |
+|---|---|
+| Agent 1 | Minimise — 1–3 entry points max, every param essential |
+| Agent 2 | Maximise flexibility — support extension without caller changes |
+| Agent 3 | Optimise for the common caller — make the default case trivial |
+| Agent 4 | Ports & adapters — pure domain interface, all infrastructure injected |
+
+**Skills 2.0:** `allowed-tools: Read Grep Glob Write Bash(git *)` — `argument-hint: [path/to/scope]` — auto-invokes on trigger phrases; requires git for churn analysis
 
 ```
 arch-lens/
-├── SKILL.md                          Seven-step workflow, behavioural rules, advanced features
+├── SKILL.md                          Workflow summary table + behavioural rules (66 lines)
 └── references/
-    ├── WORKFLOW.md                   Full step-by-step instructions and Explore agent prompt
-    ├── DETECTION-PATTERNS.md         Friction vocabulary and dependency categories
-    ├── INTERFACE-DESIGN.md           Sub-agent brief template and design constraints
-    └── RFC-FILE-FORMAT.md            RFC action file format and complete example
+    ├── WORKFLOW.md                   Full step-by-step detail and Explore agent prompt
+    ├── DETECTION-PATTERNS.md         Friction vocabulary, dependency categories, testing strategy
+    ├── INTERFACE-DESIGN.md           Sub-agent brief template, design constraints, comparison format
+    └── RFC-FILE-FORMAT.md            Action file format, effort/priority/label mapping, full example
 ```
-
----
 
 ## Installation
 
@@ -293,6 +333,44 @@ Or describe what you need — the skill triggers on context:
 ```
 
 Note: This skill has `disable-model-invocation: true`, so it will only activate when you explicitly invoke it — it will never auto-trigger during normal conversation.
+
+### design-critique
+
+```
+/design-critique
+```
+
+Or trigger it naturally:
+
+```
+"Grill me on this architecture"
+"Stress-test this plan"
+"Pre-mortem this feature design"
+"Red team my approach"
+"Critique this"
+```
+
+The skill self-directs toward relevant context — if it has file access, it reads the codebase silently before asking its first question.
+
+### arch-lens
+
+```
+/arch-lens
+/arch-lens src/payments
+```
+
+Or trigger it naturally:
+
+```
+"Arch review this codebase"
+"Find shallow modules"
+"Surface coupling and testability issues"
+"Run an Ousterhout review on src/"
+"Find architectural friction"
+"Audit the module depth"
+```
+
+Pass an optional path to scope the analysis to a specific directory. Without arguments, the skill analyses the full repository. The skill walks you through all seven steps interactively — it will not proceed past candidate confirmation or interface selection without your input. The final output is an `arch-rfcs-YYYY-MM-DD.md` file at the project root ready to action with your GitHub or Jira MCP tooling.
 
 ---
 
