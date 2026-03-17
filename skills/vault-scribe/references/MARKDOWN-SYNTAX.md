@@ -131,6 +131,41 @@ Inline footnote.^[This is inline.]    <!-- Inline style: Obsidian only -->
 
 ---
 
+## Table of Contents
+
+Neither GitHub nor Obsidian supports inline TOC directives natively. **Never use `[TOC]`, `[[_TOC_]]`, or any other TOC directive** — they render as broken text or plain blockquotes on both platforms.
+
+| Syntax | GitHub | Obsidian | Notes |
+|---|---|---|---|
+| `[TOC]` | ❌ | ❌ | Renders as plain text |
+| `[[_TOC_]]` | ❌ | ❌ | Azure DevOps only |
+| `<!-- TOC -->` | ❌ | ❌ | No processor on either platform |
+| Manual anchor links | ✅ | ✅ | **Use this** |
+| Auto sidebar TOC | ✅ | ✅ (plugin) | Generated automatically — no directive needed |
+
+**When a TOC is needed**, write it manually using standard Markdown anchor links:
+
+```markdown
+## Table of Contents
+
+- [Overview](#overview)
+- [How It Works](#how-it-works)
+  - [Step One](#step-one)
+- [Examples](#examples)
+- [References](#references)
+```
+
+Heading anchor rules (same on GitHub and Obsidian):
+- Lowercase all characters
+- Replace spaces with hyphens `-`
+- Remove all punctuation except hyphens
+- Example: `## How It Works` → `#how-it-works`
+
+> [!NOTE]
+> GitHub automatically renders a clickable TOC in the document sidebar — no inline TOC is needed for `.md` files viewed on GitHub. Only add a manual TOC when the document is long (6+ sections) and will be read outside a browser context.
+
+---
+
 ## Compatibility Quick Reference
 
 | Feature | GFM (GitHub) | Obsidian |
@@ -151,3 +186,5 @@ Inline footnote.^[This is inline.]    <!-- Inline style: Obsidian only -->
 | Math (LaTeX) | ✅ | ✅ |
 | Task lists | ✅ | ✅ |
 | Footnotes `[^1]` | ✅ | ✅ |
+| `[TOC]` / `[[_TOC_]]` directives | ❌ | ❌ |
+| Manual anchor-link TOC | ✅ | ✅ |
