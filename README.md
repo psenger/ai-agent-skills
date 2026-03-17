@@ -29,6 +29,7 @@ Think of it as a playbook: you define the process once, and the agent follows it
 | **[vault-scribe](skills/vault-scribe/)** | `/vault-scribe` | Converts transcripts, meeting notes, brainstorming sessions, strategy docs, and rough notes into polished Obsidian vault Markdown — GitHub-compatible by default, with type-aware frontmatter schemas |
 | **[agentic-skeleton-dir-structure](skills/agentic-skeleton-dir-structure/)** | `/agentic-skeleton-dir-structure` | Scaffolds production-ready directory structures for agentic AI projects using Agent-OS v3 (Builder Methods) — supports single repos, mono-repos, multi-language repos, any platform, any language |
 | **[git-commit-pr-message](skills/git-commit-pr-message/)** | `/git-commit-pr-message` | Generates Conventional Commits messages, PR titles/descriptions, and Keep a Changelog v1.1.0 entries — with sensitive content scanning, GitHub/Jira ticket linking, and release workflow |
+| **[arch-lens](skills/arch-lens/)** | `/arch-lens` | Seven-step interactive architectural review anchored in Ousterhout's deep-module principle — explores a codebase for shallow modules, hidden coupling, and testability seams, spawns parallel sub-agents to design competing interfaces, then writes a structured RFC action file readable by GitHub MCP or ROVO (Jira) MCP |
 
 ### vault-scribe
 
@@ -136,6 +137,43 @@ git-commit-pr-message/
 ├── SKILL.md                          Workflow (9 steps) + behavioural rules
 └── references/
     └── examples.md                   Commit, PR, changelog, ticket, and scan examples
+```
+
+### arch-lens
+
+Your architectural review assistant. Analyses a codebase through the lens of Ousterhout's deep-module principle — a deep module has a small interface hiding a large implementation, making it testable at the boundary and navigable by AI without reading internals.
+
+Detection is organic, not mechanical: an Explore sub-agent navigates the codebase the way a developer would. The confusion it encounters, the files it has to bounce between, the test boundaries it can't find — that friction IS the signal. No checklists.
+
+**What it does:**
+
+1. **Explores organically** — spawns an Explore sub-agent that navigates naturally, recording friction: concept scatter, shallow interfaces, unreachable test seams, hidden orchestration, and integration risk
+2. **Presents candidate clusters** — groups friction into named clusters with: modules involved, coupling reason, call patterns, shared types, dependency category, and existing tests a boundary test would replace
+3. **Asks what to explore** — single open question; user picks a cluster and directs the angle
+4. **Frames the problem space** — principle violated, current interface, dependency category, blast radius, and what tests currently have to reach through to exercise the behaviour
+5. **Spawns parallel sub-agents** — 3–4 agents in parallel, each given an independent technical brief and a distinct design constraint
+6. **Presents designs and recommends** — interface signature, usage example, hidden complexity, dependency strategy, and trade-offs per design; compared in a table; followed by a strong opinionated recommendation
+7. **Writes an RFC action file** — `arch-rfcs-YYYY-MM-DD.md` at the project root; structured for direct consumption by GitHub MCP or ROVO (Jira) MCP
+
+**Dependency categories:**
+
+| Category | What it means | Testing approach |
+|---|---|---|
+| In-process | Pure computation, no I/O | Test directly — no adapters |
+| Local-substitutable | Infrastructure with a high-fidelity stand-in | Test with PGLite, in-memory FS, etc. |
+| Remote but owned | Your services across a network boundary | Ports & adapters — in-memory adapter for tests |
+| True external | Third-party services you don't control | Mock at the boundary |
+
+**Skills 2.0:** `allowed-tools: Read Grep Glob Write Bash(git *)` — `argument-hint: [path/to/scope]` — requires `git` for churn analysis
+
+```
+arch-lens/
+├── SKILL.md                          Seven-step workflow, behavioural rules, advanced features
+└── references/
+    ├── WORKFLOW.md                   Full step-by-step instructions and Explore agent prompt
+    ├── DETECTION-PATTERNS.md         Friction vocabulary and dependency categories
+    ├── INTERFACE-DESIGN.md           Sub-agent brief template and design constraints
+    └── RFC-FILE-FORMAT.md            RFC action file format and complete example
 ```
 
 ---
