@@ -31,6 +31,7 @@ Think of it as a playbook: you define the process once, and the agent follows it
 | **[git-commit-pr-message](skills/git-commit-pr-message/)** | `/git-commit-pr-message` | Generates Conventional Commits messages, PR titles/descriptions, and Keep a Changelog v1.1.0 entries — with sensitive content scanning, GitHub/Jira ticket linking, and release workflow |
 | **[design-critique](skills/design-critique/)** | `/design-critique` | Structured design critique and plan stress-testing — acts as a relentless interviewer using pre-mortem, red teaming, and ATAM techniques to challenge technical architectures, product plans, and feature designs exhaustively |
 | **[arch-lens](skills/arch-lens/)** | `/arch-lens` | Seven-step interactive architectural review anchored in Ousterhout's deep-module principle — explores a codebase for shallow modules, hidden coupling, and testability seams, spawns parallel sub-agents to design competing interfaces, then writes a structured RFC action file readable by GitHub MCP or ROVO (Jira) MCP |
+| **[create-a-skill](skills/create-a-skill/)** | `/create-a-skill` | Create new agent skills from scratch, modify and improve existing skills, and measure skill performance — interviews the user, drafts SKILL.md with bundled resources, runs evals, benchmarks, iterates on feedback, optimises description triggering, and packages distributable `.skill` files |
 
 ### vault-scribe
 

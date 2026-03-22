@@ -1,0 +1,14 @@
+create-a-skill
+Copyright 2026 Philip A Senger
+
+This skill is a derivative work incorporating material from:
+
+1. "skill-creator" by Anthropic, PBC
+   Licensed under the Apache License 2.0
+   Copyright 2025 Anthropic, PBC
+   https://github.com/anthropics/skills
+
+2. "write-a-skill" by Matt Pocock
+   Licensed under the MIT License
+   Copyright 2026 Matt Pocock
+   https://github.com/mattpocock/skills
