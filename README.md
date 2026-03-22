@@ -31,6 +31,7 @@ Think of it as a playbook: you define the process once, and the agent follows it
 | **[git-commit-pr-message](skills/git-commit-pr-message/)** | `/git-commit-pr-message` | Generates Conventional Commits messages, PR titles/descriptions, and Keep a Changelog v1.1.0 entries — with sensitive content scanning, GitHub/Jira ticket linking, and release workflow |
 | **[design-critique](skills/design-critique/)** | `/design-critique` | Structured design critique and plan stress-testing — acts as a relentless interviewer using pre-mortem, red teaming, and ATAM techniques to challenge technical architectures, product plans, and feature designs exhaustively |
 | **[arch-lens](skills/arch-lens/)** | `/arch-lens` | Seven-step interactive architectural review anchored in Ousterhout's deep-module principle — explores a codebase for shallow modules, hidden coupling, and testability seams, spawns parallel sub-agents to design competing interfaces, then writes a structured RFC action file readable by GitHub MCP or ROVO (Jira) MCP |
+| **[review-api-design](skills/review-api-design/)** | `/review-api-design` | Reviews REST API designs during the planning phase against security, resilience, design, and operational best practices — produces structured findings with severity levels, source citations, and a readiness assessment |
 | **[create-a-skill](skills/create-a-skill/)** | `/create-a-skill` | Create new agent skills from scratch, modify and improve existing skills, and measure skill performance — interviews the user, drafts SKILL.md with bundled resources, runs evals, benchmarks, iterates on feedback, optimises description triggering, and packages distributable `.skill` files |
 
 ### vault-scribe
@@ -217,6 +218,53 @@ arch-lens/
     ├── DETECTION-PATTERNS.md         Friction vocabulary, dependency categories, testing strategy
     ├── INTERFACE-DESIGN.md           Sub-agent brief template, design constraints, comparison format
     └── RFC-FILE-FORMAT.md            Action file format, effort/priority/label mapping, full example
+```
+
+### review-api-design
+
+Your API design review assistant. Vets REST API designs during the planning phase — before a single line of code is written. Produces structured review documents with severity-rated findings, source citations, and a readiness assessment.
+
+**What it does:**
+
+1. **Gathers context** — asks about domain, consumers, scale, auth requirements, deployment, and team experience (skips questions already answered by the input)
+2. **Loads relevant references** — selectively reads from 10 domain-specific checklists based on what the design needs
+3. **Conducts systematic review** — evaluates against security, resilience, design principles, payloads, extensibility, communication patterns, gateways, and operational best practices
+4. **Produces a structured review** — summary table, detailed findings (What/Why/Recommendation with source citations), "What's Missing" gap analysis, and readiness assessment
+
+**Review domains (10 reference files):**
+
+| Domain | What It Covers |
+|--------|---------------|
+| Design Principles | Naming, versioning, CRUD, idempotency, health checks, tracing, parameters, ID exposure |
+| Payloads & Errors | Response structure, pagination, RFC 9457 errors, identifiers, content negotiation |
+| Security (Auth) | Zero trust, OAuth 2.0/2.1, RBAC/ABAC, MFA/passkeys, JWT, rate limiting, sessions, risk-based security |
+| Security (Defense) | Enumeration, information disclosure, input validation, CORS, CSRF, security headers, OWASP API Top 10 |
+| Extensibility | Fixed vs variable arity, metadata escape hatches, SOLID principles, response evolution, Hyrum's Law |
+| Resilience | Retries, circuit breakers, timeouts, bulkheads, caching, observability, SLIs/SLOs |
+| Communication Patterns | REST vs GraphQL vs WebSockets vs SSE — when to use each, hybrid architectures |
+| API Gateways | Gateway patterns, product comparison, when to use/skip |
+| Human Aspect | Adoption, documentation, NFRs, testing strategy |
+| Pragmatism | Dependencies, framework lock-in, build vs buy |
+
+**Invocation note:** This skill works best when invoked explicitly via `/review-api-design`. It may also activate during plan mode when API design decisions are being made, but explicit invocation is more reliable.
+
+```
+review-api-design/
+├── SKILL.md                          Workflow + output format + example
+├── evals/
+│   └── evals.json                    3 test cases
+└── references/
+    ├── design-principles.md          Naming, versioning, CRUD, parameters
+    ├── design-extensibility.md       Arity, metadata, SOLID, response evolution
+    ├── payloads-errors.md            Response structure, pagination, errors, IDs
+    ├── security-auth.md              Identity, auth, tokens, trust boundaries
+    ├── security-defense.md           Enumeration, CSRF, CORS, info disclosure
+    ├── resilience.md                 Retries, circuit breakers, observability
+    ├── api-communication-patterns.md REST vs GraphQL vs WebSockets vs SSE
+    ├── api-gateways.md               Gateway patterns and product comparison
+    ├── human-aspect.md               Adoption, documentation, NFRs
+    ├── pragmatism.md                 Dependencies, lock-in, build vs buy
+    └── sources.md                    Consolidated references (cited in findings)
 ```
 
 ### create-a-skill
@@ -425,6 +473,27 @@ Or trigger it naturally:
 ```
 
 Pass an optional path to scope the analysis to a specific directory. Without arguments, the skill analyses the full repository. The skill walks you through all seven steps interactively — it will not proceed past candidate confirmation or interface selection without your input. The final output is an `arch-rfcs-YYYY-MM-DD.md` file at the project root ready to action with your GitHub or Jira MCP tooling.
+
+### review-api-design
+
+```
+/review-api-design
+/review-api-design POST /users, GET /users/{id}, DELETE /users/{id}
+```
+
+Or trigger it naturally:
+
+```
+"Review my API"
+"API design review"
+"Vet this REST contract"
+"Check my endpoints"
+"Is this endpoint structure any good?"
+```
+
+Pass an endpoint list or OpenAPI spec as an argument, or paste it in a follow-up message. For vague verbal descriptions ("I'm building an API for X"), the skill asks clarifying questions before producing a review. The output is a structured review document with severity-rated findings and a readiness assessment.
+
+**Note:** This skill works most reliably when invoked explicitly with `/review-api-design`. It may auto-trigger during plan mode conversations about API design, but explicit invocation is recommended.
 
 ### create-a-skill
 
