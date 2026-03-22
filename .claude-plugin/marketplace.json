@@ -27,6 +27,12 @@
       "source": "./skills/arch-lens",
       "description": "Explores a codebase for architectural friction through the lens of Ousterhout's deep-module principle (small interface, large implementation). Seven-step interactive workflow: an Explore sub-agent navigates the codebase organically — the friction it experiences IS the signal. Surfaces candidate clusters with coupling reasons, call patterns, shared types, dependency categories, and existing tests that a boundary test would replace. User picks what to explore, frames the problem, then 3–4 parallel sub-agents design competing deep-module interfaces. Chosen design becomes a structured RFC action file readable by GitHub MCP or ROVO (Jira) MCP. Use when the user says \"arch review\", \"find shallow modules\", \"module depth\", \"deep module\", \"Ousterhout\", \"testability audit\", \"surface coupling\", \"design interfaces\", \"RFC issues\", or \"architectural friction\".",
       "version": "1.0.0"
+    },
+    {
+      "name": "create-a-skill",
+      "source": "./skills/create-a-skill",
+      "description": "Create new agent skills from scratch, modify and improve existing skills, and measure skill performance through evaluation and benchmarking. Use when users want to create a skill, write a skill, build a new skill, edit or optimize an existing skill, run evals to test a skill, benchmark skill performance, or optimize a skill's description for better triggering accuracy. Also triggers when users say \"turn this into a skill\", \"make a skill for X\", \"skill for doing Y\", or ask about skill structure, skill format, or SKILL.md files.",
+      "version": "1.0.0"
     }
   ]
 }

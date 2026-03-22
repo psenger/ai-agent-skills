@@ -219,6 +219,59 @@ arch-lens/
     └── RFC-FILE-FORMAT.md            Action file format, effort/priority/label mapping, full example
 ```
 
+### create-a-skill
+
+Your skill authoring assistant. Walks you through the full lifecycle of creating, testing, and shipping an agent skill — from initial interview through packaging a distributable `.skill` file.
+
+**What it does:**
+
+1. **Gathers requirements** — interviews you about the skill's purpose, triggers, output format, edge cases, and dependencies; researches the domain via web search and MCPs
+2. **Drafts the skill** — writes SKILL.md with proper frontmatter, progressive disclosure, bundled scripts, and reference files
+3. **Tests with evals** — spawns parallel runs (with-skill vs baseline), drafts assertions, grades outputs, and aggregates benchmarks
+4. **Iterates on feedback** — launches an interactive viewer for qualitative review, reads your feedback, and rewrites the skill
+5. **Optimises description** — generates trigger eval queries, runs an automated optimisation loop with train/test split to maximise triggering accuracy
+6. **Packages** — validates and creates a `.skill` zip file ready for distribution
+
+**Key features:**
+- Detailed user interview before writing a single line
+- Web research for unfamiliar domains
+- Quantitative eval loop with grading, benchmarking, and analyst pass
+- Interactive HTML viewer for qualitative review
+- Blind A/B comparison between skill versions (advanced)
+- Description optimisation with train/test split to prevent overfitting
+- Skill 2.0 compliant output
+
+**License note:** This skill is a derivative work incorporating material from Anthropic's [skill-creator](https://github.com/anthropics/skills) (Apache 2.0) and Matt Pocock's [write-a-skill](https://github.com/mattpocock/skills) (MIT). See `skills/create-a-skill/NOTICE` and `skills/create-a-skill/LICENSE.txt` for details.
+
+```
+create-a-skill/
+├── SKILL.md                          Workflow (6 phases) + writing guide
+├── agents/
+│   ├── grader.md                     Assertion evaluation against outputs
+│   ├── comparator.md                 Blind A/B comparison
+│   └── analyzer.md                   Post-hoc analysis + benchmark patterns
+├── assets/
+│   └── eval_review.html              Trigger eval review UI template
+├── eval-viewer/
+│   ├── generate_review.py            Interactive result viewer server
+│   └── viewer.html                   Viewer HTML template
+├── references/
+│   └── schemas.md                    JSON schemas for all data structures
+├── scripts/
+│   ├── quick_validate.py             SKILL.md validation
+│   ├── package_skill.py              .skill file packaging
+│   ├── run_eval.py                   Trigger testing
+│   ├── run_loop.py                   Description optimisation loop
+│   ├── improve_description.py        Description improvement
+│   ├── aggregate_benchmark.py        Benchmark aggregation
+│   ├── generate_report.py            HTML report generation
+│   └── utils.py                      Shared utilities
+├── LICENSE.txt                       Apache License 2.0
+└── NOTICE                            Attribution notice
+```
+
+---
+
 ## Installation
 
 ### Via npx (works with Claude Code, Codex, Cursor)
@@ -372,6 +425,24 @@ Or trigger it naturally:
 ```
 
 Pass an optional path to scope the analysis to a specific directory. Without arguments, the skill analyses the full repository. The skill walks you through all seven steps interactively — it will not proceed past candidate confirmation or interface selection without your input. The final output is an `arch-rfcs-YYYY-MM-DD.md` file at the project root ready to action with your GitHub or Jira MCP tooling.
+
+### create-a-skill
+
+```
+/create-a-skill
+```
+
+Or trigger it naturally:
+
+```
+"I want to make a skill for X"
+"Turn this into a skill"
+"Create a skill that does Y"
+"Write a skill for managing Z"
+"Help me build a new skill"
+```
+
+The skill interviews you about requirements before writing anything. It handles the full lifecycle — from initial draft through eval, iteration, description optimisation, and packaging.
 
 ---
 
