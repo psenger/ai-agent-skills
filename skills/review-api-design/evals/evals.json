@@ -1,0 +1,23 @@
+{
+  "skill_name": "review-api-design",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Review this API:\n\nPOST /users\nGET /users/{id}\nPUT /users/{id}\nDELETE /users/{id}\nGET /orders\nPOST /orders\nGET /orders/{id}\n\nThis is for an e-commerce platform. We're using Express and PostgreSQL.",
+      "expected_output": "Should flag: no versioning, no auth model, no error format, no pagination for GET /orders, no idempotency keys for POST, sequential IDs likely, no health checks, no rate limiting. Should ask about: consumers (public or internal?), scale, deployment. Should NOT generate code.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Please review this OpenAPI spec:\n\nopenapi: 3.0.3\ninfo:\n  title: Payments API\n  version: 1.0.0\npaths:\n  /v1/payments:\n    post:\n      summary: Create payment\n      requestBody:\n        required: true\n        content:\n          application/json:\n            schema:\n              type: object\n              required: [amount, currency]\n              properties:\n                amount:\n                  type: integer\n                currency:\n                  type: string\n      responses:\n        '201':\n          description: Payment created\n  /v1/payments/{id}:\n    get:\n      summary: Get payment\n      parameters:\n        - name: id\n          in: path\n          required: true\n          schema:\n            type: integer\n      responses:\n        '200':\n          description: Payment details",
+      "expected_output": "Should extract context from spec (payments domain, versioned). Should flag: sequential integer IDs (type: integer for payment ID is an enumeration risk for a payment API), no auth defined in spec, no error responses defined, no idempotency key for POST /payments (critical for payments), no Idempotency-Key header, no rate limiting, amount as integer without specifying smallest currency unit, no pagination for list endpoint. Should recognize good: versioning present (/v1/), contract-first approach. Should NOT ask redundant context questions already answered by the spec.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "I'm building an API for a mobile fitness app. Users can track workouts, follow other users, and view a social feed. We expect about 10k DAU growing to 100k. What should I think about?",
+      "expected_output": "Should ask clarifying questions first (not jump to review): auth approach, team experience, deployment target, real-time needs for social feed. Should suggest considering: SSE or WebSockets for the social feed (not just REST polling), cursor-based pagination for feed endpoints, privacy controls for follow relationships (BOLA risk), rate limiting on social actions (prevent spam follows), caching strategy for feed. Should flag that 10k-100k DAU implies moderate scale requiring attention to resilience but not extreme measures. Should NOT produce a full review document yet — needs more context first.",
+      "files": []
+    }
+  ]
+}
