@@ -7,13 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-03-22
+
 ### Added
 
 - **review-api-design** — Planning-phase REST API design review skill with 10 domain-specific reference checklists, structured output format, severity-rated findings, source citations, and 3 eval test cases ([#7](https://github.com/psenger/ai-agent-skills/issues/7))
-
-### Fixed
-
-- Added missing CHANGELOG.md to the project
+- CHANGELOG.md with retroactive project history
+- `.skillignore` for review-api-design to exclude evals from packaging
 
 ## [0.5.0] - 2026-03-22
 
@@ -49,7 +49,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **git-commit-pr-message** — Git commit, PR, and changelog workflow skill
 - Initial project structure and README
 
-[Unreleased]: https://github.com/psenger/ai-agent-skills/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/psenger/ai-agent-skills/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/psenger/ai-agent-skills/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/psenger/ai-agent-skills/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/psenger/ai-agent-skills/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/psenger/ai-agent-skills/compare/v0.2.0...v0.3.0
