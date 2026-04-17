@@ -1,0 +1,22 @@
+[
+  {"query": "Can you review my API design? I have these endpoints: POST /products, GET /products/{id}, DELETE /products/{id}", "should_trigger": true},
+  {"query": "I'm planning a REST API for a healthcare scheduling system. Here's my OpenAPI spec...", "should_trigger": true},
+  {"query": "review my API", "should_trigger": true},
+  {"query": "Is this endpoint structure any good? GET /v1/users, POST /v1/users, PATCH /v1/users/{id}", "should_trigger": true},
+  {"query": "I need to design API endpoints for a multi-tenant SaaS platform, what should I consider?", "should_trigger": true},
+  {"query": "We're in the planning phase for a new microservice. Can you vet the REST contract before we start coding?", "should_trigger": true},
+  {"query": "check my endpoints - POST /auth/login, POST /auth/register, GET /auth/me, POST /auth/refresh", "should_trigger": true},
+  {"query": "Here's our swagger.yaml for the inventory service, can you critique it before the sprint starts?", "should_trigger": true},
+  {"query": "We're debating whether to use REST or GraphQL for our new mobile app backend. What are the tradeoffs?", "should_trigger": true},
+  {"query": "I have a list of 15 endpoints for our order management API. Can you tell me if I'm missing anything important from a security and design perspective?", "should_trigger": true},
+  {"query": "Can you help me fix this Express route handler? It's returning a 500 error when I POST to /users", "should_trigger": false},
+  {"query": "Write me a REST API in Node.js with Express that has CRUD endpoints for a blog", "should_trigger": false},
+  {"query": "How do I set up authentication with Passport.js in my Express app?", "should_trigger": false},
+  {"query": "Review this pull request for our API service - here's the diff", "should_trigger": false},
+  {"query": "My API is throwing CORS errors in the browser, how do I fix it?", "should_trigger": false},
+  {"query": "Can you write unit tests for my REST API controller?", "should_trigger": false},
+  {"query": "Help me debug this 429 rate limit error I'm getting from the Stripe API", "should_trigger": false},
+  {"query": "I need to migrate our REST API from Express to Fastify, what's the best approach?", "should_trigger": false},
+  {"query": "Review this database schema for our e-commerce app - here are the tables and relationships", "should_trigger": false},
+  {"query": "How do I deploy my API to AWS Lambda with API Gateway?", "should_trigger": false}
+]
