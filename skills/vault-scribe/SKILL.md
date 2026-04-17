@@ -9,7 +9,7 @@ description: >
   or requests for GitHub-compatible Markdown documents.
 user-invocable: true
 allowed-tools: Read, Grep, Edit, Write
-argument-hint: "[note-type: article|meeting|brainstorming|strategy|deep-research]"
+argument-hint: "[note-type: article|how-to|technical|meeting|brainstorming|strategy|deep-research]"
 ---
 
 # Vault Scribe — Obsidian + GitHub Markdown Skill
@@ -40,6 +40,8 @@ When invoked with an argument (e.g. `/vault-scribe meeting`), use `$ARGUMENTS` t
 | If the user wants… | Set `type` to |
 |---|---|
 | A guide, reference doc, or knowledge article | `article` |
+| A step-by-step instructional guide or procedure | `how-to` |
+| Architecture docs, RFCs, design docs, system specs | `technical` |
 | An investigation with multiple sources | `deep-research` |
 | A versioned plan or strategy document | `strategy` |
 | Meeting notes, 1:1s, standups, retrospectives | `meeting` |
