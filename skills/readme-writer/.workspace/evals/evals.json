@@ -1,0 +1,26 @@
+{
+  "skill_name": "readme-writer",
+  "evals": [
+    {
+      "id": 1,
+      "name": "node-cli-fresh-readme",
+      "prompt": "Write a README for my project at /Users/psenger/Developer/ai-agent-skills/skills/readme-writer-workspace/projects/squash-cli",
+      "expected_output": "A complete README.md with: centered <div align=\"center\"> header block, bold tagline, badges, nav links, hook paragraph, Installation section with the correct npm install command, Quickstart/Usage section with realistic examples, License section. No placeholder text left unfilled.",
+      "files": ["projects/squash-cli/package.json", "projects/squash-cli/.github/workflows/ci.yml", "projects/squash-cli/LICENSE"]
+    },
+    {
+      "id": 2,
+      "name": "python-library-readme",
+      "prompt": "I need docs for this package at /Users/psenger/Developer/ai-agent-skills/skills/readme-writer-workspace/projects/data-lens — it's a library people import into their Python projects",
+      "expected_output": "A complete README.md with: centered header, correct pip install command (pip install data-lens), import-based quickstart showing a real API call, Configuration or API section. Should classify correctly as a library/SDK (not CLI) since the user clarified the primary usage.",
+      "files": ["projects/data-lens/pyproject.toml"]
+    },
+    {
+      "id": 3,
+      "name": "rewrite-bad-readme",
+      "prompt": "The README for my project is terrible, fix it. Project is at /Users/psenger/Developer/ai-agent-skills/skills/readme-writer-workspace/projects/bad-readme-project",
+      "expected_output": "A rewritten README.md that: removes marketing language (powerful, cutting-edge, etc.), replaces emoji-bullet features with specific capabilities, fixes the install command (removes $ prompt), adds realistic usage examples, uses centered header pattern. Should read the existing README.md and produce a clearly improved version.",
+      "files": ["projects/bad-readme-project/package.json", "projects/bad-readme-project/README.md"]
+    }
+  ]
+}

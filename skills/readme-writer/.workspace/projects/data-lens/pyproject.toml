@@ -1,0 +1,35 @@
+[project]
+name = "data-lens"
+version = "0.4.2"
+description = "Profile, diff, and summarize Pandas DataFrames in one line"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+authors = [
+  {name = "Philip A Senger", email = "philip.a.senger@cngrgroup.com"}
+]
+keywords = ["pandas", "dataframe", "profiling", "eda", "data-quality"]
+dependencies = [
+  "pandas>=2.0",
+  "numpy>=1.24",
+  "rich>=13.0",
+  "pyarrow>=14.0"
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "pytest-cov", "ruff", "mypy"]
+
+[project.scripts]
+data-lens = "data_lens.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/psenger/data-lens"
+Documentation = "https://data-lens.readthedocs.io"
+Repository = "https://github.com/psenger/data-lens.git"
+Issues = "https://github.com/psenger/data-lens/issues"
+
+[tool.ruff]
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
