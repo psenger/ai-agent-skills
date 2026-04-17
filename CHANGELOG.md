@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-04-17
+
+### Added
+
+- **readme-writer** — New skill that generates polished `README.md` files for software projects. Four-step workflow: intake (auto-detect repo metadata, classify project type), structure (section menu), write (centered header/footer, code before prose, no marketing), output. Includes reference template, good-vs-bad examples, and evaluation workspace ([#11](https://github.com/psenger/ai-agent-skills/issues/11))
+- **vault-scribe** — Two new note types: `how-to` (step-by-step instructional guides) and `technical` (architecture docs, RFCs, ADRs, system specs). Promotes `version` to a core field on all note types. Adds reusable Review & Governance fields (`reviewers`, `signoff`, `revision_notes`, `published`). Expands `strategy` type with `prepared_for` and `quarter`. Adds Finance, How-To, Legal & Compliance, and Operations categories. Includes worked examples for both new note types ([#10](https://github.com/psenger/ai-agent-skills/issues/10))
+
+### Changed
+
+- **review-api-design** — Evaluation outputs moved to `.workspace/` directory; `.skillignore` consolidated to exclude `.workspace/` alongside `evals/`
+
 ## [0.6.0] - 2026-03-22
 
 ### Added
@@ -49,7 +60,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **git-commit-pr-message** — Git commit, PR, and changelog workflow skill
 - Initial project structure and README
 
-[Unreleased]: https://github.com/psenger/ai-agent-skills/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/psenger/ai-agent-skills/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/psenger/ai-agent-skills/compare/v0.6.0...v1.0.0
 [0.6.0]: https://github.com/psenger/ai-agent-skills/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/psenger/ai-agent-skills/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/psenger/ai-agent-skills/compare/v0.3.0...v0.4.0
