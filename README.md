@@ -33,6 +33,7 @@ Think of it as a playbook: you define the process once, and the agent follows it
 | **[arch-lens](skills/arch-lens/)** | `/arch-lens` | Seven-step interactive architectural review anchored in Ousterhout's deep-module principle — explores a codebase for shallow modules, hidden coupling, and testability seams, spawns parallel sub-agents to design competing interfaces, then writes a structured RFC action file readable by GitHub MCP or ROVO (Jira) MCP |
 | **[review-api-design](skills/review-api-design/)** | `/review-api-design` | Reviews REST API designs during the planning phase against security, resilience, design, and operational best practices — produces structured findings with severity levels, source citations, and a readiness assessment |
 | **[create-a-skill](skills/create-a-skill/)** | `/create-a-skill` | Create new agent skills from scratch, modify and improve existing skills, and measure skill performance — interviews the user, drafts SKILL.md with bundled resources, runs evals, benchmarks, iterates on feedback, optimises description triggering, and packages distributable `.skill` files |
+| **[handoff](skills/handoff/)** | `/handoff` | Saves or loads a structured JSON snapshot of session state so work can resume cleanly in a new session or be delegated to a sub-agent — better than `/compact` because the schema forces every field to be explicit |
 
 ### vault-scribe
 
@@ -512,6 +513,25 @@ Or trigger it naturally:
 ```
 
 The skill interviews you about requirements before writing anything. It handles the full lifecycle — from initial draft through eval, iteration, description optimisation, and packaging.
+
+### handoff
+
+Captures the complete state of your current session to a structured JSON snapshot so you can resume cleanly in a new session, switch task phases, or delegate work to a sub-agent without losing context.
+
+**Two modes:**
+
+| Mode | When to use |
+|---|---|
+| CREATE | Session approaching 300–400k tokens, switching phases, delegating to a sub-agent, or starting fresh with correct state |
+| RESUME | Loading a prior snapshot to continue where you left off |
+
+**Why it beats `/compact`:** Compaction is lossy and exhibits recency bias. The schema forces every field — goal, decisions, completed steps, pending steps, constraints, discovered issues, modified files — to be explicit. Nothing is silently dropped.
+
+```
+/handoff                          # save to .claude/handoffs/<timestamp>-<slug>.json
+/handoff auth-refactor.json       # save to explicit path
+/handoff load auth-refactor.json  # resume from file
+```
 
 ---
 
