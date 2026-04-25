@@ -1,0 +1,353 @@
+{
+  "exit_reason": "max_iterations (1)",
+  "original_description": "Defines the commit message, branch naming, pull request, and release note conventions for the ai-agent-skills repository. Make sure to load this skill whenever writing a commit message, naming a branch, drafting a PR title or body, or writing CHANGELOG entries in this repo. Use when the user asks \"how should I format this commit\", \"what's the branch naming convention\", \"how do I write the PR\", \"what commit type should I use\", or before any git commit, PR creation, release note, or CHANGELOG task in this project.",
+  "best_description": "Defines the commit message, branch naming, pull request, and release note conventions for the ai-agent-skills repository. Make sure to load this skill whenever writing a commit message, naming a branch, drafting a PR title or body, or writing CHANGELOG entries in this repo. Use when the user asks \"how should I format this commit\", \"what's the branch naming convention\", \"how do I write the PR\", \"what commit type should I use\", or before any git commit, PR creation, release note, or CHANGELOG task in this project.",
+  "best_score": "11/20",
+  "best_train_score": "11/20",
+  "best_test_score": null,
+  "final_description": "Defines the commit message, branch naming, pull request, and release note conventions for the ai-agent-skills repository. Make sure to load this skill whenever writing a commit message, naming a branch, drafting a PR title or body, or writing CHANGELOG entries in this repo. Use when the user asks \"how should I format this commit\", \"what's the branch naming convention\", \"how do I write the PR\", \"what commit type should I use\", or before any git commit, PR creation, release note, or CHANGELOG task in this project.",
+  "iterations_run": 1,
+  "holdout": 0.0,
+  "train_size": 20,
+  "test_size": 0,
+  "history": [
+    {
+      "iteration": 1,
+      "description": "Defines the commit message, branch naming, pull request, and release note conventions for the ai-agent-skills repository. Make sure to load this skill whenever writing a commit message, naming a branch, drafting a PR title or body, or writing CHANGELOG entries in this repo. Use when the user asks \"how should I format this commit\", \"what's the branch naming convention\", \"how do I write the PR\", \"what commit type should I use\", or before any git commit, PR creation, release note, or CHANGELOG task in this project.",
+      "train_passed": 11,
+      "train_failed": 9,
+      "train_total": 20,
+      "train_results": [
+        {
+          "query": "what are the valid commit types here \u2014 feat, fix, what else?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "what's the scope I should use in commits here?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "show me the correct PR body format for this repo",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "how do I write CHANGELOG entries in this project?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "how should I format this commit message?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "what's the branch naming convention for this repo?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "how do I format the changelog bullet for this bug fix?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "what semver bump does a feat commit get in this project?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "create a PR for this branch",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "commit these changes for me",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "I need to write a release commit message, what's the exact format?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "write a readme for this project",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "what commit type should I use for adding a new skill?",
+          "should_trigger": true,
+          "trigger_rate": 1.0,
+          "triggers": 1,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "scaffold a new agentic project structure",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "start work on issue #14",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "review this API design",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "what is semantic versioning?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "ship this feature",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "create a handoff for this session",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "what is conventional commits in general?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        }
+      ],
+      "test_passed": null,
+      "test_failed": null,
+      "test_total": null,
+      "test_results": null,
+      "passed": 11,
+      "failed": 9,
+      "total": 20,
+      "results": [
+        {
+          "query": "what are the valid commit types here \u2014 feat, fix, what else?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "what's the scope I should use in commits here?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "show me the correct PR body format for this repo",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "how do I write CHANGELOG entries in this project?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "how should I format this commit message?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "what's the branch naming convention for this repo?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "how do I format the changelog bullet for this bug fix?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "what semver bump does a feat commit get in this project?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "create a PR for this branch",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "commit these changes for me",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "I need to write a release commit message, what's the exact format?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "write a readme for this project",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "what commit type should I use for adding a new skill?",
+          "should_trigger": true,
+          "trigger_rate": 1.0,
+          "triggers": 1,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "scaffold a new agentic project structure",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "start work on issue #14",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "review this API design",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "what is semantic versioning?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "ship this feature",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "create a handoff for this session",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "what is conventional commits in general?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        }
+      ]
+    }
+  ]
+}

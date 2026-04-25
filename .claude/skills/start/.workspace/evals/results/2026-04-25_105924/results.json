@@ -1,0 +1,353 @@
+{
+  "exit_reason": "max_iterations (1)",
+  "original_description": "Begins a new piece of work in the ai-agent-skills repository. Two modes: EXISTING ISSUE (user provides a GitHub issue number or URL \u2014 fetches it, cuts the correct branch) and NEW ISSUE (user describes what needs doing \u2014 classifies as feature or bug, drafts a structured requirement using the repo's issue template, confirms with the user, creates the GitHub issue, then cuts the branch). Always checks GitHub auth first and confirms user identity. Use when the user says \"start work on #14\", \"begin issue\", \"start a new feature\", \"I need to build X\", \"create an issue for Y\", or passes a GitHub issue URL. Load the `conventions` skill for branch naming rules.",
+  "best_description": "Begins a new piece of work in the ai-agent-skills repository. Two modes: EXISTING ISSUE (user provides a GitHub issue number or URL \u2014 fetches it, cuts the correct branch) and NEW ISSUE (user describes what needs doing \u2014 classifies as feature or bug, drafts a structured requirement using the repo's issue template, confirms with the user, creates the GitHub issue, then cuts the branch). Always checks GitHub auth first and confirms user identity. Use when the user says \"start work on #14\", \"begin issue\", \"start a new feature\", \"I need to build X\", \"create an issue for Y\", or passes a GitHub issue URL. Load the `conventions` skill for branch naming rules.",
+  "best_score": "10/20",
+  "best_train_score": "10/20",
+  "best_test_score": null,
+  "final_description": "Begins a new piece of work in the ai-agent-skills repository. Two modes: EXISTING ISSUE (user provides a GitHub issue number or URL \u2014 fetches it, cuts the correct branch) and NEW ISSUE (user describes what needs doing \u2014 classifies as feature or bug, drafts a structured requirement using the repo's issue template, confirms with the user, creates the GitHub issue, then cuts the branch). Always checks GitHub auth first and confirms user identity. Use when the user says \"start work on #14\", \"begin issue\", \"start a new feature\", \"I need to build X\", \"create an issue for Y\", or passes a GitHub issue URL. Load the `conventions` skill for branch naming rules.",
+  "iterations_run": 1,
+  "holdout": 0.0,
+  "train_size": 20,
+  "test_size": 0,
+  "history": [
+    {
+      "iteration": 1,
+      "description": "Begins a new piece of work in the ai-agent-skills repository. Two modes: EXISTING ISSUE (user provides a GitHub issue number or URL \u2014 fetches it, cuts the correct branch) and NEW ISSUE (user describes what needs doing \u2014 classifies as feature or bug, drafts a structured requirement using the repo's issue template, confirms with the user, creates the GitHub issue, then cuts the branch). Always checks GitHub auth first and confirms user identity. Use when the user says \"start work on #14\", \"begin issue\", \"start a new feature\", \"I need to build X\", \"create an issue for Y\", or passes a GitHub issue URL. Load the `conventions` skill for branch naming rules.",
+      "train_passed": 10,
+      "train_failed": 10,
+      "train_total": 20,
+      "train_results": [
+        {
+          "query": "I want to work on this: https://github.com/psenger/ai-agent-skills/issues/5",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "I need to build a new skill for summarising Slack threads",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "create an issue for adding dark mode support to the vault-scribe skill",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "start work on the handoff skill bug where resume doesn't load constraints",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "I need to create a github issue and start working on it \u2014 the release skill is broken on main",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "I need to start a new feature \u2014 users should be able to export reports to PDF",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "start work on #14",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "begin issue 23",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "start a new feature branch for the design-critique skill enhancement",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "create a PR for this branch",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "cut a release",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "file a feature request for TypeScript type checking support in skills",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "commit these changes with a conventional commit message",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "ship this feature",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "list the open issues in this repo",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "what's the branch naming convention?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "push my changes to origin",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "write a readme for this new skill",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "merge this PR",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "what was the last commit on main?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        }
+      ],
+      "test_passed": null,
+      "test_failed": null,
+      "test_total": null,
+      "test_results": null,
+      "passed": 10,
+      "failed": 10,
+      "total": 20,
+      "results": [
+        {
+          "query": "I want to work on this: https://github.com/psenger/ai-agent-skills/issues/5",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "I need to build a new skill for summarising Slack threads",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "create an issue for adding dark mode support to the vault-scribe skill",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "start work on the handoff skill bug where resume doesn't load constraints",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "I need to create a github issue and start working on it \u2014 the release skill is broken on main",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "I need to start a new feature \u2014 users should be able to export reports to PDF",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "start work on #14",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "begin issue 23",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "start a new feature branch for the design-critique skill enhancement",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "create a PR for this branch",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "cut a release",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "file a feature request for TypeScript type checking support in skills",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "commit these changes with a conventional commit message",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "ship this feature",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "list the open issues in this repo",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "what's the branch naming convention?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "push my changes to origin",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "write a readme for this new skill",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "merge this PR",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "what was the last commit on main?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "skill_name": "release",
+  "evals": [
+    {
+      "id": 1,
+      "name": "wrap-up-feature-branch",
+      "prompt": "Ship this. I'm on feature/14-add-handoff-skill and everything is committed.",
+      "expected_output": "Detects feature branch (not main). Verifies working tree is clean. Reads git diff main...HEAD to detect a new skill was added (skills/handoff/). Updates CHANGELOG.md under ## [Unreleased] ### Added with a handoff bullet. Updates README.md skills table with handoff row. Updates .claude-plugin/marketplace.json with handoff entry. Commits those admin changes with 'chore(handoff): update changelog, readme, and marketplace'. Pushes the branch. Creates a draft PR with type(scope): subject title and the PR template body including the Skill Checklist section. Prints the PR URL.",
+      "files": [],
+      "expectations": [
+        "Confirms working tree is clean before proceeding (git status --porcelain is empty)",
+        "Detects that a new skill directory skills/handoff/ was added (not just modified)",
+        "Updates CHANGELOG.md under ## [Unreleased] with a ### Added bullet for handoff",
+        "Updates README.md skills table with a new row for handoff",
+        "Updates .claude-plugin/marketplace.json with a new handoff plugin entry",
+        "Commits only CHANGELOG.md, README.md, and marketplace.json (not other files)",
+        "Commit message follows chore(<skill-name>): convention",
+        "Pushes the branch to origin",
+        "Creates a draft PR (--draft flag)",
+        "PR title follows type(scope): subject format",
+        "PR body includes the Skill Checklist section",
+        "Prints the PR URL to the user"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "cut-release-on-main",
+      "prompt": "Cut a release. I'm on main, everything is merged and clean.",
+      "expected_output": "Verifies on main, working tree clean, up to date with origin. Gets last tag (e.g. v1.0.0) and lists commits since. Applies semver rules: feat commits → minor bump → v1.1.0. Presents proposed version and the driving commits, waits for confirmation. Updates CHANGELOG.md: renames ## [Unreleased] to ## [1.1.0] - 2026-04-25, inserts fresh ## [Unreleased] above, updates comparison links at bottom. Commits with 'chore(release): cut v1.1.0 release'. Tags v1.1.0. Pushes commit and tag. Creates draft GitHub release. Tells user to publish manually.",
+      "files": [],
+      "expectations": [
+        "Confirms currently on main branch",
+        "Confirms working tree is clean",
+        "Runs git fetch origin and confirms no commits behind",
+        "Reads last tag with git describe --tags --abbrev=0",
+        "Lists commits since last tag to determine version bump",
+        "Presents proposed version and waits for explicit user confirmation",
+        "CHANGELOG.md has old [Unreleased] renamed to [X.Y.Z] - YYYY-MM-DD",
+        "CHANGELOG.md has a new empty ## [Unreleased] inserted above the versioned section",
+        "Comparison links at the bottom of CHANGELOG.md are updated",
+        "Commit message is exactly 'chore(release): cut vX.Y.Z release'",
+        "An annotated tag is created (git tag -a vX.Y.Z)",
+        "Both the commit and the tag are pushed to origin",
+        "A draft GitHub release is created (not published)",
+        "User is told to publish the release manually"
+      ]
+    }
+  ]
+}

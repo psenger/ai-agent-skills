@@ -1,0 +1,102 @@
+[
+  {
+    "query": "ship this",
+    "should_trigger": true,
+    "notes": "Exact trigger phrase from description"
+  },
+  {
+    "query": "I'm done, create a PR for this feature",
+    "should_trigger": true,
+    "notes": "Done + PR creation — WRAP UP phase trigger"
+  },
+  {
+    "query": "cut a release",
+    "should_trigger": true,
+    "notes": "Exact trigger phrase from description"
+  },
+  {
+    "query": "tag a release for v1.2.0",
+    "should_trigger": true,
+    "notes": "'tag a release' — in description triggers"
+  },
+  {
+    "query": "wrap this up",
+    "should_trigger": true,
+    "notes": "Exact trigger phrase from description"
+  },
+  {
+    "query": "release it",
+    "should_trigger": true,
+    "notes": "Exact trigger phrase from description"
+  },
+  {
+    "query": "push this feature branch and open a draft PR",
+    "should_trigger": true,
+    "notes": "WRAP UP phase — push + PR creation"
+  },
+  {
+    "query": "I've committed everything, now I need to ship it",
+    "should_trigger": true,
+    "notes": "Work done + ship intent — WRAP UP trigger"
+  },
+  {
+    "query": "create a draft release",
+    "should_trigger": true,
+    "notes": "Draft release creation — CUT RELEASE phase"
+  },
+  {
+    "query": "I'm ready to merge this — can you update the changelog and open a PR?",
+    "should_trigger": true,
+    "notes": "WRAP UP phase — changelog update + PR"
+  },
+  {
+    "query": "start work on #14",
+    "should_trigger": false,
+    "notes": "Starting work — start, not release"
+  },
+  {
+    "query": "begin a new feature branch",
+    "should_trigger": false,
+    "notes": "Branch creation — start"
+  },
+  {
+    "query": "what's the branch naming convention?",
+    "should_trigger": false,
+    "notes": "Format question — conventions"
+  },
+  {
+    "query": "how do I write a commit message?",
+    "should_trigger": false,
+    "notes": "Format guidance — conventions"
+  },
+  {
+    "query": "deploy this to production",
+    "should_trigger": false,
+    "notes": "Deployment — outside scope of this skill"
+  },
+  {
+    "query": "publish this npm package",
+    "should_trigger": false,
+    "notes": "npm publish — unrelated to this release skill"
+  },
+  {
+    "query": "revert my last commit",
+    "should_trigger": false,
+    "notes": "Git revert — not a release workflow action"
+  },
+  {
+    "query": "create a github issue for this bug",
+    "should_trigger": false,
+    "notes": "Issue creation — start"
+  },
+  {
+    "query": "cherry-pick this commit to the hotfix branch",
+    "should_trigger": false,
+    "notes": "Git cherry-pick — not what release does"
+  },
+  {
+    "query": "what's in the changelog?",
+    "should_trigger": false,
+    "notes": "Reading the changelog, not releasing"
+  }
+]

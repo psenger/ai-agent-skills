@@ -1,0 +1,102 @@
+[
+  {
+    "query": "start work on #14",
+    "should_trigger": true,
+    "notes": "Exact trigger phrase from description — issue number"
+  },
+  {
+    "query": "begin issue 23",
+    "should_trigger": true,
+    "notes": "Alternate phrasing of 'begin issue' — in description triggers"
+  },
+  {
+    "query": "I need to start a new feature — users should be able to export reports to PDF",
+    "should_trigger": true,
+    "notes": "NEW ISSUE mode — description of work needing an issue and branch"
+  },
+  {
+    "query": "create an issue for adding dark mode support to the vault-scribe skill",
+    "should_trigger": true,
+    "notes": "Create issue request — start NEW ISSUE mode"
+  },
+  {
+    "query": "I want to work on this: https://github.com/psenger/ai-agent-skills/issues/5",
+    "should_trigger": true,
+    "notes": "GitHub issue URL — explicitly in description triggers"
+  },
+  {
+    "query": "I need to build a new skill for summarising Slack threads",
+    "should_trigger": true,
+    "notes": "'I need to build X' — in description triggers"
+  },
+  {
+    "query": "start work on the handoff skill bug where resume doesn't load constraints",
+    "should_trigger": true,
+    "notes": "Bug start — should classify as bug and cut fix/ branch"
+  },
+  {
+    "query": "file a feature request for TypeScript type checking support in skills",
+    "should_trigger": true,
+    "notes": "NEW ISSUE mode — feature request creation"
+  },
+  {
+    "query": "I need to create a github issue and start working on it — the release skill is broken on main",
+    "should_trigger": true,
+    "notes": "Bug report creation + branch — full NEW ISSUE flow"
+  },
+  {
+    "query": "start a new feature branch for the design-critique skill enhancement",
+    "should_trigger": true,
+    "notes": "Feature branch creation — start skill core purpose"
+  },
+  {
+    "query": "ship this feature",
+    "should_trigger": false,
+    "notes": "Shipping — release, not start"
+  },
+  {
+    "query": "cut a release",
+    "should_trigger": false,
+    "notes": "Release cutting — release"
+  },
+  {
+    "query": "commit these changes with a conventional commit message",
+    "should_trigger": false,
+    "notes": "Commit action — git/release, not start"
+  },
+  {
+    "query": "what's the branch naming convention?",
+    "should_trigger": false,
+    "notes": "Format question — conventions, not start (start uses conventions)"
+  },
+  {
+    "query": "create a PR for this branch",
+    "should_trigger": false,
+    "notes": "PR creation — release WRAP UP phase"
+  },
+  {
+    "query": "push my changes to origin",
+    "should_trigger": false,
+    "notes": "Git push — release or raw git, not start"
+  },
+  {
+    "query": "list the open issues in this repo",
+    "should_trigger": false,
+    "notes": "Browsing issues, not starting work on one"
+  },
+  {
+    "query": "what was the last commit on main?",
+    "should_trigger": false,
+    "notes": "Git log query — not starting any work"
+  },
+  {
+    "query": "write a readme for this new skill",
+    "should_trigger": false,
+    "notes": "README generation — readme-writer skill"
+  },
+  {
+    "query": "merge this PR",
+    "should_trigger": false,
+    "notes": "PR merge — done manually or release, not start"
+  }
+]

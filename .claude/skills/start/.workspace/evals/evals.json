@@ -1,0 +1,56 @@
+{
+  "skill_name": "start",
+  "evals": [
+    {
+      "id": 1,
+      "name": "existing-issue-branch-cut",
+      "prompt": "Start work on issue #14 in the psenger/ai-agent-skills repo.",
+      "expected_output": "Checks GitHub auth (MCP server or gh CLI). Shows the issue title and first few lines of the body, asks for confirmation. Pulls latest main. Creates a feature branch named feature/14-<slug> where slug is derived from the issue title (e.g. feature/14-add-handoff-skill). Reports the branch name and that the user is ready to work.",
+      "files": [],
+      "expectations": [
+        "Checks for GitHub MCP server or gh CLI auth before doing anything",
+        "Calls gh issue view 14 or equivalent MCP tool to fetch the issue",
+        "Displays the issue number and title to the user",
+        "Asks the user to confirm this is the right issue before proceeding",
+        "Runs git checkout main && git pull origin main before cutting the branch",
+        "Branch name starts with 'feature/' (enhancement label) followed by '14-'",
+        "Branch slug is 2-4 lowercase hyphenated words derived from the issue title",
+        "Reports the created branch name to the user"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "new-issue-feature-flow",
+      "prompt": "I need to build a skill that reviews pull requests and summarises the changes. Create the issue and start the work.",
+      "expected_output": "Classifies as a feature (new capability). Fills the feature_request.md template: user story (As a developer, I want..., so that...), 2-4 Given/When/Then acceptance criteria, Out of Scope section. Shows the draft to the user and asks for approval. On approval, runs gh issue create with the filled template and enhancement label. Captures the issue number. Cuts feature/<N>-pr-review-skill branch.",
+      "files": [],
+      "expectations": [
+        "Classifies the request as a feature (not a bug)",
+        "Uses the feature_request.md template structure",
+        "Draft includes a user story in As a / I want / so that format",
+        "Draft includes at least 2 Given/When/Then acceptance criteria",
+        "Shows the full draft to the user and waits for confirmation before submitting",
+        "Creates the issue with the 'enhancement' label",
+        "Branch uses 'feature/' prefix",
+        "Branch includes the new issue number in the name"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "new-issue-bug-flow",
+      "prompt": "The release skill crashes when run on main with no prior tags — it fails on git describe. File a bug and start fixing it.",
+      "expected_output": "Classifies as a bug. Fills the bug_report.md template: what happened (git describe fails), what was expected (graceful handling), steps to reproduce, Given/When/Then acceptance criteria. Shows draft to user. Creates issue with 'bug' label. Cuts fix/<N>-release-no-prior-tags or similar branch with fix/ prefix.",
+      "files": [],
+      "expectations": [
+        "Classifies the request as a bug (something broken)",
+        "Uses the bug_report.md template structure",
+        "Draft includes 'What Happened' and 'What Was Expected' sections",
+        "Draft includes steps to reproduce",
+        "Shows the full draft and waits for user confirmation",
+        "Creates the issue with the 'bug' label",
+        "Branch uses 'fix/' prefix (bug label → fix/ convention)",
+        "Branch includes the new issue number in the name"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+[
+  {
+    "query": "how should I format this commit message?",
+    "should_trigger": true,
+    "notes": "Direct request for commit format — core trigger"
+  },
+  {
+    "query": "what's the branch naming convention for this repo?",
+    "should_trigger": true,
+    "notes": "Branch naming is explicitly covered in conventions"
+  },
+  {
+    "query": "what commit type should I use for adding a new skill?",
+    "should_trigger": true,
+    "notes": "Commit type question — directly answered by conventions"
+  },
+  {
+    "query": "how do I write CHANGELOG entries in this project?",
+    "should_trigger": true,
+    "notes": "CHANGELOG format is a conventions skill responsibility"
+  },
+  {
+    "query": "show me the correct PR body format for this repo",
+    "should_trigger": true,
+    "notes": "PR body format — conventions covers this explicitly"
+  },
+  {
+    "query": "what's the scope I should use in commits here?",
+    "should_trigger": true,
+    "notes": "Commit scope is defined in conventions"
+  },
+  {
+    "query": "how do I format the changelog bullet for this bug fix?",
+    "should_trigger": true,
+    "notes": "CHANGELOG bullet format — conventions with Keep a Changelog 1.1.0"
+  },
+  {
+    "query": "what semver bump does a feat commit get in this project?",
+    "should_trigger": true,
+    "notes": "Versioning rules are documented in conventions"
+  },
+  {
+    "query": "what are the valid commit types here — feat, fix, what else?",
+    "should_trigger": true,
+    "notes": "Listing valid types — explicit conventions table query"
+  },
+  {
+    "query": "I need to write a release commit message, what's the exact format?",
+    "should_trigger": true,
+    "notes": "Release commit format — conventions has an exact template"
+  },
+  {
+    "query": "commit these changes for me",
+    "should_trigger": false,
+    "notes": "Wants action taken, not format guidance — should trigger release or git"
+  },
+  {
+    "query": "create a PR for this branch",
+    "should_trigger": false,
+    "notes": "Wants PR created — release handles this, not conventions"
+  },
+  {
+    "query": "what is semantic versioning?",
+    "should_trigger": false,
+    "notes": "General knowledge question about semver, not this repo's specific rules"
+  },
+  {
+    "query": "start work on issue #14",
+    "should_trigger": false,
+    "notes": "Starting work — start skill, not conventions"
+  },
+  {
+    "query": "ship this feature",
+    "should_trigger": false,
+    "notes": "Release action — release skill"
+  },
+  {
+    "query": "review this API design",
+    "should_trigger": false,
+    "notes": "API review — review-api-design skill"
+  },
+  {
+    "query": "write a readme for this project",
+    "should_trigger": false,
+    "notes": "README generation — readme-writer skill"
+  },
+  {
+    "query": "scaffold a new agentic project structure",
+    "should_trigger": false,
+    "notes": "Project scaffolding — agentic-skeleton-dir-structure skill"
+  },
+  {
+    "query": "what is conventional commits in general?",
+    "should_trigger": false,
+    "notes": "General CC knowledge question — not asking about this repo's specific format"
+  },
+  {
+    "query": "create a handoff for this session",
+    "should_trigger": false,
+    "notes": "Session state save — handoff skill, not conventions"
+  }
+]

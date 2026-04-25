@@ -1,0 +1,49 @@
+{
+  "skill_name": "conventions",
+  "evals": [
+    {
+      "id": 1,
+      "name": "commit-message-format",
+      "prompt": "I just added a new handoff skill to the ai-agent-skills repo. The skill saves session state to JSON. What should my commit message look like?",
+      "expected_output": "Produces a commit message following Conventional Commits format: feat(handoff): <imperative subject>. Subject is lowercase, no trailing period, under 72 chars. May include an optional body explaining why. Does NOT include a Co-Authored-By trailer.",
+      "files": [],
+      "expectations": [
+        "Commit message uses the 'feat' type for a new skill",
+        "Scope is 'handoff' (the skill name)",
+        "Subject is in imperative mood and lowercase",
+        "Subject has no trailing period",
+        "Subject is 72 characters or fewer",
+        "No Co-Authored-By trailer is included"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "branch-naming",
+      "prompt": "I'm about to start work on GitHub issue #17 which is about fixing a bug where the vault-scribe skill generates invalid frontmatter when the title contains special characters. What should I name my branch?",
+      "expected_output": "Produces a branch name matching the pattern fix/<issue-number>-<slug>: fix/17-vault-scribe-frontmatter. Uses fix/ prefix because it is a bug. Slug is 2-4 words, lowercase, hyphenated, no stop words.",
+      "files": [],
+      "expectations": [
+        "Branch name uses the 'fix/' prefix (bug label maps to fix/)",
+        "Branch name includes the issue number 17",
+        "Slug is 2-4 hyphenated lowercase words derived from the issue description",
+        "No version dots used — hyphens only",
+        "Branch name does not exceed reasonable length"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "changelog-entry",
+      "prompt": "I just merged a PR that added a new readme-writer skill. Issue was #9. The URL is https://github.com/psenger/ai-agent-skills/issues/9. Write the correct CHANGELOG entry for the Unreleased section.",
+      "expected_output": "Produces a bullet under '### Added' subsection inside '## [Unreleased]'. Format: '- **readme-writer** — <what was added and why>. ([#9](https://github.com/psenger/ai-agent-skills/issues/9))'",
+      "files": [],
+      "expectations": [
+        "Entry goes under '### Added' (new skill = Added subsection)",
+        "Skill name is bold: **readme-writer**",
+        "Entry uses an em dash separator after the skill name",
+        "Issue link is at the end in format ([#9](url))",
+        "Description is plain English, one bullet only",
+        "Entry is inside ## [Unreleased] section"
+      ]
+    }
+  ]
+}

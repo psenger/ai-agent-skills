@@ -1,0 +1,353 @@
+{
+  "exit_reason": "max_iterations (1)",
+  "original_description": "Ships completed work in the ai-agent-skills repository. Two phases depending on context: WRAP UP (on a feature branch with committed work \u2014 updates CHANGELOG, README, marketplace.json, commits, pushes, creates a PR) and CUT RELEASE (on main after a merge \u2014 determines semver bump, updates CHANGELOG version section, tags, pushes, creates a GitHub draft release). Use when the user says \"ship this\", \"I'm done\", \"create a PR\", \"cut a release\", \"tag a release\", \"wrap this up\", or \"release it\". Always checks GitHub auth first. Load the `conventions` skill for commit and PR formatting rules.",
+  "best_description": "Ships completed work in the ai-agent-skills repository. Two phases depending on context: WRAP UP (on a feature branch with committed work \u2014 updates CHANGELOG, README, marketplace.json, commits, pushes, creates a PR) and CUT RELEASE (on main after a merge \u2014 determines semver bump, updates CHANGELOG version section, tags, pushes, creates a GitHub draft release). Use when the user says \"ship this\", \"I'm done\", \"create a PR\", \"cut a release\", \"tag a release\", \"wrap this up\", or \"release it\". Always checks GitHub auth first. Load the `conventions` skill for commit and PR formatting rules.",
+  "best_score": "10/20",
+  "best_train_score": "10/20",
+  "best_test_score": null,
+  "final_description": "Ships completed work in the ai-agent-skills repository. Two phases depending on context: WRAP UP (on a feature branch with committed work \u2014 updates CHANGELOG, README, marketplace.json, commits, pushes, creates a PR) and CUT RELEASE (on main after a merge \u2014 determines semver bump, updates CHANGELOG version section, tags, pushes, creates a GitHub draft release). Use when the user says \"ship this\", \"I'm done\", \"create a PR\", \"cut a release\", \"tag a release\", \"wrap this up\", or \"release it\". Always checks GitHub auth first. Load the `conventions` skill for commit and PR formatting rules.",
+  "iterations_run": 1,
+  "holdout": 0.0,
+  "train_size": 20,
+  "test_size": 0,
+  "history": [
+    {
+      "iteration": 1,
+      "description": "Ships completed work in the ai-agent-skills repository. Two phases depending on context: WRAP UP (on a feature branch with committed work \u2014 updates CHANGELOG, README, marketplace.json, commits, pushes, creates a PR) and CUT RELEASE (on main after a merge \u2014 determines semver bump, updates CHANGELOG version section, tags, pushes, creates a GitHub draft release). Use when the user says \"ship this\", \"I'm done\", \"create a PR\", \"cut a release\", \"tag a release\", \"wrap this up\", or \"release it\". Always checks GitHub auth first. Load the `conventions` skill for commit and PR formatting rules.",
+      "train_passed": 10,
+      "train_failed": 10,
+      "train_total": 20,
+      "train_results": [
+        {
+          "query": "tag a release for v1.2.0",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "I'm done, create a PR for this feature",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "push this feature branch and open a draft PR",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "I'm ready to merge this \u2014 can you update the changelog and open a PR?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "ship this",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "wrap this up",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "I've committed everything, now I need to ship it",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "what's the branch naming convention?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "begin a new feature branch",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "create a draft release",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "start work on #14",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "cut a release",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "revert my last commit",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "publish this npm package",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "create a github issue for this bug",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "how do I write a commit message?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "what's in the changelog?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "deploy this to production",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "cherry-pick this commit to the hotfix branch",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "release it",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        }
+      ],
+      "test_passed": null,
+      "test_failed": null,
+      "test_total": null,
+      "test_results": null,
+      "passed": 10,
+      "failed": 10,
+      "total": 20,
+      "results": [
+        {
+          "query": "tag a release for v1.2.0",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "I'm done, create a PR for this feature",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "push this feature branch and open a draft PR",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "I'm ready to merge this \u2014 can you update the changelog and open a PR?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "ship this",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "wrap this up",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "I've committed everything, now I need to ship it",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "what's the branch naming convention?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "begin a new feature branch",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "create a draft release",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "start work on #14",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "cut a release",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        },
+        {
+          "query": "revert my last commit",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "publish this npm package",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "create a github issue for this bug",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "how do I write a commit message?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "what's in the changelog?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "deploy this to production",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "cherry-pick this commit to the hotfix branch",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": true
+        },
+        {
+          "query": "release it",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 1,
+          "pass": false
+        }
+      ]
+    }
+  ]
+}
