@@ -1,0 +1,78 @@
+USER MESSAGE:
+"I've spent this session designing a PostgreSQL schema for a multi-tenant SaaS app. Key decisions made: using row-level security (RLS) over separate schemas per tenant for cost reasons, settled on UUID primary keys, and chose JSONB for the flexible metadata column instead of EAV. Three migration files written so far (001_initial.sql, 002_rls_policies.sql, 003_indexes.sql). Still need to write the seed data script, document the RLS policy logic, and benchmark query performance under 1000 tenants. The constraint is that the schema must support eventual migration to CockroachDB — so no PostgreSQL-specific types that CockroachDB doesn't support. /handoff db-schema-work.json"
+
+---
+
+RESPONSE (without handoff skill):
+
+I can see you're trying to invoke /handoff to create a structured handoff document (db-schema-work.json), but that skill isn't available in this session. I'll do my best to capture the session context manually.
+
+Here's a summary of what you've described, organized so it could be picked up by another agent or resumed in a future session:
+
+---
+
+## Session Summary: Multi-Tenant PostgreSQL Schema Design
+
+### Decisions Made
+
+| Decision | Choice | Rationale |
+|----------|--------|-----------|
+| Tenant isolation strategy | Row-Level Security (RLS) | Cost — separate schemas per tenant is more expensive |
+| Primary key type | UUID | Consistent, distributed-safe |
+| Flexible metadata column | JSONB | Chosen over EAV (Entity-Attribute-Value) pattern |
+| CockroachDB compatibility | Required | No PostgreSQL-specific types that CockroachDB doesn't support |
+
+### CockroachDB Compatibility Notes
+
+Given the CockroachDB constraint, watch out for:
+- `SERIAL` / `BIGSERIAL` — use `UUID` (already done) or `gen_random_uuid()`
+- `JSONB` is supported in CockroachDB, so that choice is safe
+- RLS is supported in CockroachDB (as of v22.2+), but verify policy syntax compatibility
+- Avoid `EXCLUDE` constraints — not supported in CockroachDB
+- Avoid `DEFERRABLE` constraints — limited support
+- Avoid `pg_trgm` or other PostgreSQL-specific extensions in indexes
+
+### Migration Files Written
+
+1. `001_initial.sql` — initial schema
+2. `002_rls_policies.sql` — RLS policy definitions
+3. `003_indexes.sql` — index definitions
+
+### Remaining Work
+
+1. **Seed data script** — create representative tenant + row data for testing
+2. **Document RLS policy logic** — explain the intent and mechanics of each policy in `002_rls_policies.sql`
+3. **Benchmark query performance under 1000 tenants** — load test with realistic data volume
+
+### Suggested Next Steps for Seed Script
+
+```sql
+-- Suggested seed structure (adjust to your actual schema)
+INSERT INTO tenants (id, name) VALUES
+  (gen_random_uuid(), 'Tenant Alpha'),
+  (gen_random_uuid(), 'Tenant Beta');
+
+-- Use a loop or generate_series() to create 1000 tenants for benchmarking:
+INSERT INTO tenants (id, name)
+SELECT gen_random_uuid(), 'Tenant ' || i
+FROM generate_series(1, 1000) AS s(i);
+```
+
+Note: `generate_series()` is supported in CockroachDB, so this is safe.
+
+### RLS Documentation Template
+
+For `002_rls_policies.sql`, each policy should be documented with:
+- **Policy name** and target table
+- **Command** (SELECT, INSERT, UPDATE, DELETE, or ALL)
+- **Using clause** — the row-visible condition (e.g., `tenant_id = current_setting('app.current_tenant')::uuid`)
+- **With check clause** — the write-permitted condition
+- **How `current_setting` is set** — typically via a `SET LOCAL` at the start of each transaction
+
+---
+
+## What /handoff Would Have Done
+
+The `/handoff` command would have written a structured JSON file (`db-schema-work.json`) capturing this context in a machine-readable format — including decisions, file paths, remaining tasks, and constraints — suitable for loading into a new session or handing off to another agent. Without that skill, this plain-text summary is the best alternative.
+
+If you want to preserve this in a reusable format, I can write the JSON manually to `db-schema-work.json` in your desired output location. Just let me know.

@@ -1,0 +1,82 @@
+SESSION HANDOFF SUMMARY
+=======================
+Date: 2026-04-25
+Session Duration: ~2 hours
+Project: Express.js API
+
+---
+
+COMPLETED WORK
+--------------
+1. JWT Authentication Middleware
+   - File: src/middleware/auth.ts
+   - Status: Done, with known issue (see below)
+
+2. Route Handlers
+   - /users route handler — complete
+   - /posts route handler — complete
+
+3. Unit Tests
+   - Unit tests for /users — complete
+   - Unit tests for /posts — complete
+
+---
+
+KNOWN ISSUE
+-----------
+Location: src/middleware/auth.ts
+Description: Token refresh is not handled. When a JWT is expired, the
+middleware returns 401 even if the client has a valid refresh token.
+The correct behavior should be: detect expired token, check for valid
+refresh token, issue new access token, and continue the request.
+
+Impact: Mobile app clients that rely on refresh token flows will be
+logged out on token expiry instead of receiving a refreshed token
+transparently.
+
+---
+
+PENDING WORK
+------------
+Priority order based on dependencies:
+
+1. Token Refresh Logic (src/middleware/auth.ts)
+   - Detect token expiration separately from other JWT errors
+   - Extract and validate the refresh token from the request
+   - Issue a new access token and attach it to the response
+   - Continue processing the original request
+   - CONSTRAINT: Response shape must stay compatible with the existing
+     mobile app client — do not change response envelope structure or
+     field names
+
+2. Rate Limiting for /posts Endpoint
+   - Add rate limiting middleware to the /posts route only
+   - Choose an appropriate window and request limit
+   - Ensure rate-limit error responses match the existing response shape
+     expected by the mobile client
+
+3. Integration Tests
+   - Cover the full request lifecycle (auth middleware + route handlers)
+   - Include scenarios: valid token, expired token + valid refresh,
+     expired token + invalid refresh, rate limit exceeded
+   - These depend on items 1 and 2 being complete first
+
+---
+
+CONSTRAINTS
+-----------
+- The existing mobile app client expects the current response shape.
+  All changes must preserve the existing response envelope and field names.
+  Verify any new error responses (401, 429, etc.) match the shape the
+  client already handles.
+
+---
+
+CONTEXT FOR NEXT SESSION
+-------------------------
+- auth.ts already has the JWT verification logic in place; the gap is
+  specifically the refresh-token branch that is missing.
+- Unit tests for routes already pass — do not break them.
+- Integration tests are net-new and should be added after pending features
+  are implemented.
+- No database schema changes should be needed for the above tasks.

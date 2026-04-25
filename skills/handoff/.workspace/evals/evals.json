@@ -1,0 +1,57 @@
+{
+  "skill_name": "handoff",
+  "evals": [
+    {
+      "id": 1,
+      "name": "create-default-path",
+      "prompt": "We've been working on an Express.js API for about 2 hours. Here's what's been done: added JWT authentication middleware (src/middleware/auth.ts), created the /users and /posts route handlers, and written unit tests for both. The auth middleware has a known issue — it doesn't handle token refresh and will return 401 on expired tokens even when a valid refresh token exists. Pending work: implement token refresh logic in auth.ts, add rate limiting to the /posts endpoint, and write integration tests. Constraint: must stay compatible with the existing mobile app client which expects the current response shape. We're approaching the context limit. /handoff",
+      "expected_output": "Creates a valid JSON file in .claude/handoffs/ with a timestamped filename. The JSON contains schema_version 2.0.0, a meaningful task.goal, the token refresh issue in discovered_issues, the three pending steps, the API compatibility constraint in constraints, and the three modified files. Prints a summary to the user with task/completed/pending counts and a ready-to-paste resume_prompt. Tells the user to run /clear — does not run it itself.",
+      "files": [],
+      "expectations": [
+        "A JSON file is created inside a .claude/handoffs/ directory",
+        "The JSON contains schema_version set to exactly '2.0.0'",
+        "The JSON contains all required top-level fields: task, current_state, completed_steps, pending_steps, constraints, discovered_issues, modified_files, decisions, resume_prompt",
+        "task.goal is a single non-empty sentence",
+        "pending_steps contains at least the three items mentioned: token refresh, rate limiting, integration tests",
+        "discovered_issues references the auth token refresh problem",
+        "The output to the user includes 'Run /clear' or equivalent instruction to clear the context",
+        "resume_prompt references the handoff filename so the next agent can load it",
+        "The skill does NOT run /clear itself"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "create-explicit-filename",
+      "prompt": "I've spent this session designing a PostgreSQL schema for a multi-tenant SaaS app. Key decisions made: using row-level security (RLS) over separate schemas per tenant for cost reasons, settled on UUID primary keys, and chose JSONB for the flexible metadata column instead of EAV. Three migration files written so far (001_initial.sql, 002_rls_policies.sql, 003_indexes.sql). Still need to write the seed data script, document the RLS policy logic, and benchmark query performance under 1000 tenants. The constraint is that the schema must support eventual migration to CockroachDB — so no PostgreSQL-specific types that CockroachDB doesn't support. /handoff db-schema-work.json",
+      "expected_output": "Creates a JSON file at exactly db-schema-work.json in the current working directory. The JSON has schema_version 2.0.0, captures the three key decisions with their rationale and rejected alternatives, lists the three migration files in modified_files, includes the CockroachDB compatibility constraint, and sets resume_prompt to reference 'db-schema-work.json' by name.",
+      "files": [],
+      "expectations": [
+        "A file named exactly 'db-schema-work.json' is created (not in .claude/handoffs/, at the path specified)",
+        "The JSON contains schema_version set to exactly '2.0.0'",
+        "decisions array contains at least one entry with decision, rationale, and alternatives_rejected fields",
+        "The RLS vs separate schemas decision is captured with its cost rationale",
+        "modified_files lists all three migration SQL files",
+        "constraints includes the CockroachDB compatibility requirement",
+        "resume_prompt references 'db-schema-work.json' by name so the next agent can load it"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "resume-from-file",
+      "prompt": "Load the handoff at .workspace/evals/files/handoff-fixture.json and continue the work.",
+      "expected_output": "Reads the handoff file. Prints an oriented summary showing the task goal (React class-to-hooks migration), completed step count (3), pending step count (6), and the first pending step (UserProfile migration). Then begins work on pending_steps[0] — migrating UserProfile.tsx. Does not write a new handoff file unprompted.",
+      "files": [
+        ".workspace/evals/files/handoff-fixture.json"
+      ],
+      "expectations": [
+        "The agent reads the handoff fixture file",
+        "The oriented summary includes the task goal about React class-to-hooks migration",
+        "The summary shows 3 completed steps and 6 pending steps",
+        "The summary explicitly names UserProfile as the first pending step",
+        "The agent begins work on migrating UserProfile.tsx (the first pending step)",
+        "The agent does not write a new handoff JSON file unprompted",
+        "The agent references the discovered_issues note about getDerivedStateFromProps and the useEffect+useRef pattern"
+      ]
+    }
+  ]
+}

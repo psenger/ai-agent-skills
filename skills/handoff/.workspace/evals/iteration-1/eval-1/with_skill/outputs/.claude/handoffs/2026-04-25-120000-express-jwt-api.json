@@ -1,0 +1,59 @@
+{
+  "schema_version": "2.0.0",
+  "generated_at": "2026-04-25T12:00:00Z",
+  "task": {
+    "goal": "Build a JWT-authenticated Express.js REST API with /users and /posts endpoints, including middleware, route handlers, and tests.",
+    "acceptance_criteria": [
+      "JWT authentication middleware is in place and protects routes",
+      "Token refresh logic handles expired tokens gracefully (returns refresh result, not 401)",
+      "Rate limiting is applied to the /posts endpoint",
+      "Unit tests exist for auth middleware, /users, and /posts handlers",
+      "Integration tests cover the full request lifecycle",
+      "All responses remain compatible with the existing mobile app client's expected shape"
+    ]
+  },
+  "current_state": "The Express.js API has JWT authentication middleware, /users and /posts route handlers, and unit tests for both route modules. The auth middleware has a known defect: it does not attempt a token refresh when it encounters an expired access token — it immediately returns a 401 even when a valid refresh token is present in the request. Token refresh logic, rate limiting on /posts, and integration tests are all still pending.",
+  "completed_steps": [
+    "Created JWT authentication middleware at src/middleware/auth.ts",
+    "Created /users route handler",
+    "Created /posts route handler",
+    "Written unit tests for the /users route handler",
+    "Written unit tests for the /posts route handler"
+  ],
+  "pending_steps": [
+    "Implement token refresh logic in src/middleware/auth.ts so that expired access tokens trigger a refresh attempt before returning 401",
+    "Add rate limiting middleware to the /posts endpoint",
+    "Write integration tests covering the full request lifecycle for /users and /posts"
+  ],
+  "constraints": [
+    "All API responses must remain compatible with the existing mobile app client's expected response shape — do not change field names, types, or HTTP status codes for success paths"
+  ],
+  "discovered_issues": [
+    "src/middleware/auth.ts does not handle token refresh: when an access token is expired and a valid refresh token exists, the middleware incorrectly returns 401 instead of transparently refreshing the token"
+  ],
+  "modified_files": [
+    {
+      "path": "src/middleware/auth.ts",
+      "status": "created",
+      "note": "JWT authentication middleware; missing token-refresh handling for expired access tokens"
+    },
+    {
+      "path": "src/routes/users.ts",
+      "status": "created",
+      "note": "/users route handler with unit tests passing"
+    },
+    {
+      "path": "src/routes/posts.ts",
+      "status": "created",
+      "note": "/posts route handler with unit tests passing; rate limiting not yet added"
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "Use JWT for authentication rather than sessions",
+      "rationale": "Stateless authentication suits the mobile client and avoids server-side session storage",
+      "alternatives_rejected": ["Cookie-based sessions"]
+    }
+  ],
+  "resume_prompt": "Resume from handoff file 2026-04-25-120000-express-jwt-api.json. The Express.js JWT API has auth middleware, /users and /posts handlers, and unit tests in place. The immediate priority is fixing the token-refresh bug in src/middleware/auth.ts (expired tokens should trigger a refresh attempt, not immediately return 401). Then add rate limiting to /posts and write integration tests. Hard constraint: do not change response shapes — the mobile client depends on them."
+}

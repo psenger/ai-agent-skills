@@ -1,0 +1,102 @@
+[
+  {
+    "query": "write a readme for my project",
+    "should_trigger": true,
+    "notes": "Canonical direct trigger — exact phrase covered by description"
+  },
+  {
+    "query": "document this project — it has no README at all",
+    "should_trigger": true,
+    "notes": "'document this project' is an explicit trigger phrase in the description"
+  },
+  {
+    "query": "make a readme for my repo, it's a CLI that compresses git history",
+    "should_trigger": true,
+    "notes": "'make a readme for my repo' is an explicit trigger phrase in the description"
+  },
+  {
+    "query": "the readme is terrible, fix it — too much marketing, no real examples",
+    "should_trigger": true,
+    "notes": "'the readme is terrible, fix it' is an explicit trigger phrase in the description"
+  },
+  {
+    "query": "I need docs for this package, it's a Python data validation library",
+    "should_trigger": true,
+    "notes": "'I need docs for this package' is an explicit trigger phrase in the description"
+  },
+  {
+    "query": "can you write a getting started doc for my open source Node library?",
+    "should_trigger": true,
+    "notes": "'getting started doc' is listed as a trigger in the description"
+  },
+  {
+    "query": "Here's my package.json — can you write documentation for this project so people know how to install and use it?",
+    "should_trigger": true,
+    "notes": "User shares repo artifact and asks for documentation — covered by description"
+  },
+  {
+    "query": "generate a README.md for this Go microservice",
+    "should_trigger": true,
+    "notes": "Explicit 'generate' + 'README.md' — squarely in scope"
+  },
+  {
+    "query": "my readme is three years out of date, please rewrite it from scratch",
+    "should_trigger": true,
+    "notes": "'rewrite a README' is an explicit trigger verb in the description"
+  },
+  {
+    "query": "I want a proper GitHub landing page for this project — something that makes people want to use it",
+    "should_trigger": true,
+    "notes": "'GitHub landing page' is an explicit trigger in the description"
+  },
+  {
+    "query": "update the CHANGELOG, we just shipped v1.3.0",
+    "should_trigger": false,
+    "notes": "CHANGELOG update — explicitly excluded in description (changelogs)"
+  },
+  {
+    "query": "write a blog post about how I built this microservices architecture",
+    "should_trigger": false,
+    "notes": "Blog post — explicitly excluded in description (blog posts)"
+  },
+  {
+    "query": "create a CONTRIBUTING.md so people know how to open pull requests to this repo",
+    "should_trigger": false,
+    "notes": "CONTRIBUTING.md — markdown file about the project, but not a README; different purpose"
+  },
+  {
+    "query": "I need a design doc for the new auth system — requirements, constraints, and proposed approach",
+    "should_trigger": false,
+    "notes": "Design doc — explicitly excluded in description (design docs)"
+  },
+  {
+    "query": "add JSDoc comments to all the exported functions in src/api.ts",
+    "should_trigger": false,
+    "notes": "Inline code documentation — 'docs' keyword shared but this is source-level, not a README"
+  },
+  {
+    "query": "write release notes for v2.0 summarising what changed since v1.x",
+    "should_trigger": false,
+    "notes": "Release notes — documentation adjacent but explicitly excluded (changelogs); not a README"
+  },
+  {
+    "query": "can you explain what this codebase does? I just inherited it and have no idea",
+    "should_trigger": false,
+    "notes": "Explanation request — no write intent; user wants understanding, not a README file"
+  },
+  {
+    "query": "generate OpenAPI documentation from the Express routes in routes/api.js",
+    "should_trigger": false,
+    "notes": "API spec generation — 'generate' + 'documentation' keywords shared, but output is an OpenAPI spec not a README"
+  },
+  {
+    "query": "add a CODE_OF_CONDUCT.md and a SECURITY.md to the repo",
+    "should_trigger": false,
+    "notes": "Other governance markdown files — project docs but neither is a README"
+  },
+  {
+    "query": "I want a detailed wiki with separate pages covering architecture, deployment, and the full API reference",
+    "should_trigger": false,
+    "notes": "Wiki / multi-page docs site — documentation intent but explicitly a different artifact than a README"
+  }
+]

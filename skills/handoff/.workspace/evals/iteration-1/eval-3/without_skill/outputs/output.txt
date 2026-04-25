@@ -1,0 +1,117 @@
+Handoff loaded. Here is a summary of where things stand and how I will proceed.
+
+---
+
+CURRENT STATE
+=============
+
+Migration progress: 8 of 14 components converted.
+
+Completed:
+- Header, Footer, Button, Badge, Spinner, Card, Tag, Avatar
+- All unit tests pass for migrated components
+- ESLint rule added to ban React.Component going forward
+
+Remaining (6 components, all with lifecycle methods):
+1. UserProfile — getDerivedStateFromProps (sync URL params into state)
+2. NotificationList — componentDidMount (WebSocket subscription)
+3. DataTable — componentDidUpdate with deep comparison (lodash isEqual available)
+4. Modal — componentWillUnmount (cleanup)
+5. Tooltip — componentWillUnmount (cleanup)
+6. Dropdown — componentWillUnmount (cleanup)
+
+Constraints in force:
+- Props API must not change — callers must not need updating
+- Test files must not be modified
+- React version stays at 17.0.2
+
+---
+
+PLAN
+====
+
+I will work through the 6 remaining components in this order, from most complex to least:
+
+Step 1: UserProfile (src/components/UserProfile.tsx)
+------------------------------------------------------
+This is the trickiest case. getDerivedStateFromProps is being used to sync URL params into state.
+
+The correct functional equivalent is:
+
+  - Hold the previous URL param value in a useRef (prevUrlParamsRef).
+  - In the render body, compare the current URL param prop against the ref.
+  - If they differ, update state immediately (synchronous setState during render — allowed in React for this exact pattern, equivalent to getDerivedStateFromProps).
+  - After updating, write the new value into the ref so the next render sees it.
+
+This avoids the infinite loop because the state update is conditional (only fires when the value actually changed), and the ref tracks the last-synced value without triggering re-renders.
+
+Skeleton:
+
+  const prevUrlParamsRef = useRef(props.urlParams);
+  const [syncedState, setSyncedState] = useState(() => deriveState(props.urlParams));
+
+  if (props.urlParams !== prevUrlParamsRef.current) {
+    prevUrlParamsRef.current = props.urlParams;
+    setSyncedState(deriveState(props.urlParams));
+  }
+
+Do NOT put this logic inside a useEffect — that fires after paint and causes a flicker (two renders visible to the user). The synchronous-during-render pattern is the correct match for getDerivedStateFromProps.
+
+Step 2: NotificationList (src/components/NotificationList.tsx)
+--------------------------------------------------------------
+componentDidMount for a WebSocket subscription maps directly to useEffect with an empty dependency array [].
+
+  useEffect(() => {
+    const ws = subscribeToNotifications(...);
+    return () => ws.close(); // cleanup equivalent to componentWillUnmount
+  }, []);
+
+Step 3: DataTable (src/components/DataTable.tsx)
+------------------------------------------------
+componentDidUpdate with a deep comparison on props.data.
+
+The challenge: useEffect dependency arrays use reference equality, but props.data changes reference even when content is the same.
+
+Workaround using the ref pattern:
+  - Keep a ref holding the last props.data value.
+  - Inside useEffect (with props.data in deps), compare using lodash isEqual.
+  - Only run the expensive logic when the content actually differs.
+
+  const prevDataRef = useRef(props.data);
+
+  useEffect(() => {
+    if (!isEqual(props.data, prevDataRef.current)) {
+      prevDataRef.current = props.data;
+      // ... run the update logic
+    }
+  }, [props.data]);
+
+This mirrors the componentDidUpdate guard exactly.
+
+Step 4–6: Modal, Tooltip, Dropdown
+-----------------------------------
+All three only need componentWillUnmount cleanup. This is the simplest case:
+
+  useEffect(() => {
+    return () => {
+      // cleanup code from componentWillUnmount
+    };
+  }, []);
+
+These three can be done quickly once the harder components are complete.
+
+Step 7: Full test suite + ESLint check
+---------------------------------------
+After all 6 components are migrated:
+- Run Jest: all tests must pass without modification to test files.
+- Run ESLint: no React.Component references should remain; the no-restricted-syntax rule will catch any slip.
+- Confirm no React.Component or React.PureComponent imports remain in src/components/.
+
+---
+
+STARTING NOW: UserProfile
+==========================
+
+The next action is to open src/components/UserProfile.tsx, identify exactly how getDerivedStateFromProps is structured, and apply the useRef + synchronous-during-render conversion described above.
+
+Please share the file contents (or confirm I have filesystem access) and I will proceed with the migration immediately.

@@ -1,0 +1,59 @@
+{
+  "schema_version": "2.0.0",
+  "generated_at": "2026-04-24T09:15:00Z",
+  "task": {
+    "goal": "Migrate all React class components in src/components/ to functional components with hooks",
+    "acceptance_criteria": [
+      "No React.Component or React.PureComponent references remain in src/components/",
+      "All existing Jest tests pass without modification",
+      "No visible change in app behaviour — same props API, same rendered output"
+    ]
+  },
+  "current_state": "8 of 14 components migrated. The straightforward stateless components are done. Remaining 6 all use lifecycle methods (componentDidMount, componentDidUpdate, componentWillUnmount) that need conversion to useEffect. One component (UserProfile) also uses getDerivedStateFromProps which needs special handling.",
+  "completed_steps": [
+    "Migrated Header, Footer, Button, Badge, Spinner, Card, Tag, and Avatar components",
+    "Confirmed all unit tests pass for migrated components",
+    "Added ESLint rule no-restricted-syntax to ban React.Component going forward"
+  ],
+  "pending_steps": [
+    "Migrate UserProfile component — has getDerivedStateFromProps, convert to useEffect + ref pattern",
+    "Migrate NotificationList component — uses componentDidMount for WebSocket subscription",
+    "Migrate DataTable component — complex componentDidUpdate with deep comparison",
+    "Migrate Modal, Tooltip, and Dropdown components — all use componentWillUnmount for cleanup",
+    "Run full test suite and verify zero regressions",
+    "Remove React.Component import from all files and confirm ESLint passes"
+  ],
+  "constraints": [
+    "Must not change the public props API of any component — callers must not need updating",
+    "Test files must not be modified — they are the acceptance criteria",
+    "Cannot upgrade React version — locked at 17.0.2 due to downstream dependency"
+  ],
+  "discovered_issues": [
+    "src/components/UserProfile.tsx — getDerivedStateFromProps is used to sync URL params into state; needs useEffect + useRef to avoid infinite loop",
+    "src/components/DataTable.tsx — componentDidUpdate does a deep equality check on props.data; lodash isEqual is already imported and can be used in the dependency array workaround"
+  ],
+  "modified_files": [
+    { "path": "src/components/Header.tsx", "status": "modified", "note": "Converted from class to FC; no lifecycle methods were present" },
+    { "path": "src/components/Footer.tsx", "status": "modified", "note": "Converted from class to FC" },
+    { "path": "src/components/Button.tsx", "status": "modified", "note": "Converted from class to FC; defaultProps moved to default params" },
+    { "path": "src/components/Badge.tsx", "status": "modified", "note": "Converted from class to FC" },
+    { "path": "src/components/Spinner.tsx", "status": "modified", "note": "Converted from class to FC" },
+    { "path": "src/components/Card.tsx", "status": "modified", "note": "Converted from class to FC" },
+    { "path": "src/components/Tag.tsx", "status": "modified", "note": "Converted from class to FC" },
+    { "path": "src/components/Avatar.tsx", "status": "modified", "note": "Converted from class to FC; removed shouldComponentUpdate, added React.memo" },
+    { "path": ".eslintrc.js", "status": "modified", "note": "Added no-restricted-syntax rule banning React.Component" }
+  ],
+  "decisions": [
+    {
+      "decision": "Use React.memo on Avatar instead of shouldComponentUpdate",
+      "rationale": "shouldComponentUpdate did a shallow prop comparison — React.memo is the direct functional equivalent and requires no custom logic",
+      "alternatives_rejected": ["Custom comparison function in React.memo — overkill for shallow comparison"]
+    },
+    {
+      "decision": "Move defaultProps to default parameter values, not a separate .defaultProps assignment",
+      "rationale": "React deprecated .defaultProps for function components in React 18; moving now avoids a future migration",
+      "alternatives_rejected": [".defaultProps assignment — deprecated", "Separate defaults object — adds indirection"]
+    }
+  ],
+  "resume_prompt": "Load .claude/handoffs/2026-04-24-091500-react-hooks-migration.json. Continue the React class-to-hooks migration. Next step: migrate UserProfile (src/components/UserProfile.tsx) — it uses getDerivedStateFromProps to sync URL params into state. Convert using useEffect + useRef to avoid the infinite loop described in discovered_issues. Do not modify any test files."
+}
