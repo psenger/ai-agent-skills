@@ -1,6 +1,7 @@
 ---
 name: conventions
-publish: false
+metadata:
+  internal: true
 description: >
   Defines the commit message, branch naming, pull request, and release note
   conventions for the ai-agent-skills repository. Make sure to load this skill
