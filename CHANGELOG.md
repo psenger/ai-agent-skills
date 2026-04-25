@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-04-25
+
 ### Fixed
 
 - **marketplace** — Replace ineffective `publish: false` frontmatter with `metadata.internal: true` on workflow skills (`start`, `release`, `conventions`) — the only field the `skills` CLI (v1.5.1) actually checks to suppress discovery. ([#19](https://github.com/psenger/ai-agent-skills/issues/19))
@@ -76,7 +78,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **git-commit-pr-message** — Git commit, PR, and changelog workflow skill
 - Initial project structure and README
 
-[Unreleased]: https://github.com/psenger/ai-agent-skills/compare/v1.1.1...HEAD
+[Unreleased]: https://github.com/psenger/ai-agent-skills/compare/v1.1.2...HEAD
+[1.1.2]: https://github.com/psenger/ai-agent-skills/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/psenger/ai-agent-skills/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/psenger/ai-agent-skills/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/psenger/ai-agent-skills/compare/v0.6.0...v1.0.0
