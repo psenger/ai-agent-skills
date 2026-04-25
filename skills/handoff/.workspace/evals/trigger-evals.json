@@ -1,0 +1,102 @@
+[
+  {
+    "query": "/handoff",
+    "should_trigger": true,
+    "notes": "Explicit command — must trigger"
+  },
+  {
+    "query": "/handoff auth-refactor.json",
+    "should_trigger": true,
+    "notes": "Explicit command with filename — must trigger"
+  },
+  {
+    "query": "We're getting close to the context limit. Save the session before we clear.",
+    "should_trigger": true,
+    "notes": "Context limit + save intent — core use case"
+  },
+  {
+    "query": "I need to hand this work off to another agent. Can you capture the current state?",
+    "should_trigger": true,
+    "notes": "Sub-agent delegation — explicit in description"
+  },
+  {
+    "query": "context rot is kicking in, lets do a handoff before things get worse",
+    "should_trigger": true,
+    "notes": "Casual phrasing with typo — real user speech pattern"
+  },
+  {
+    "query": "Load the handoff at .claude/handoffs/2026-04-23-143022-auth.json",
+    "should_trigger": true,
+    "notes": "RESUME mode — explicit file path"
+  },
+  {
+    "query": "continue where we left off — there should be a handoff file from last session",
+    "should_trigger": true,
+    "notes": "RESUME mode — implicit, no filename given"
+  },
+  {
+    "query": "save state, I'm switching to a fresh session to avoid context degradation",
+    "should_trigger": true,
+    "notes": "'save state' is listed in the description triggers"
+  },
+  {
+    "query": "I'm pausing here for today. Create a handoff so I can pick this up tomorrow.",
+    "should_trigger": true,
+    "notes": "End-of-session handoff — pause and resume across time"
+  },
+  {
+    "query": "resume from my last handoff",
+    "should_trigger": true,
+    "notes": "RESUME trigger — terse, no path specified"
+  },
+  {
+    "query": "Can you save this config to a JSON file called settings.json?",
+    "should_trigger": false,
+    "notes": "File write, not session handoff — shares 'save' and 'JSON' keywords"
+  },
+  {
+    "query": "Commit my changes and push to the feature branch",
+    "should_trigger": false,
+    "notes": "Git operation — 'save' intent but not session state"
+  },
+  {
+    "query": "I want to use /compact to trim the context window",
+    "should_trigger": false,
+    "notes": "Explicitly wants /compact not handoff — respect user's stated preference"
+  },
+  {
+    "query": "Write a summary of everything we've done in this session",
+    "should_trigger": false,
+    "notes": "Summary request — similar intent but no save/resume workflow"
+  },
+  {
+    "query": "Export the current database records to output.json",
+    "should_trigger": false,
+    "notes": "Data export to JSON — shares format but not session state"
+  },
+  {
+    "query": "Let's start this problem from scratch, forget what we've done",
+    "should_trigger": false,
+    "notes": "Reset intent without saving — user wants /clear only, not handoff"
+  },
+  {
+    "query": "Create a new session and start fresh on the API design",
+    "should_trigger": false,
+    "notes": "New session without save intent — no handoff needed"
+  },
+  {
+    "query": "What's the current status of the auth work?",
+    "should_trigger": false,
+    "notes": "Status question — not a save or resume action"
+  },
+  {
+    "query": "Document what we've built so far in a markdown file",
+    "should_trigger": false,
+    "notes": "Documentation request — writing docs, not saving session state"
+  },
+  {
+    "query": "Can you read the file at src/auth/token-service.ts and explain it?",
+    "should_trigger": false,
+    "notes": "File read + explanation — no session state action"
+  }
+]
