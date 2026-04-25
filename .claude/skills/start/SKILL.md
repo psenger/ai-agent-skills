@@ -1,5 +1,6 @@
 ---
 name: start
+publish: false
 description: >
   Begins a new piece of work in the ai-agent-skills repository. Two modes: EXISTING
   ISSUE (user provides a GitHub issue number or URL — fetches it, cuts the correct
