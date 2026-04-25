@@ -1,0 +1,16 @@
+Handoff written to: .claude/handoffs/2026-04-25-120000-express-jwt-api.json
+
+Summary:
+- Task: Build a JWT-authenticated Express.js REST API with /users and /posts endpoints, including middleware, route handlers, and tests.
+- Completed: 5 steps
+- Pending: 3 steps
+- Constraints: 1
+- Open issues: 1
+- Modified files: 3
+
+Next steps:
+1. Run /clear to wipe the context window
+2. Start a new session
+3. Paste this prompt to resume:
+
+"Resume from handoff file 2026-04-25-120000-express-jwt-api.json. The Express.js JWT API has auth middleware, /users and /posts handlers, and unit tests in place. The immediate priority is fixing the token-refresh bug in src/middleware/auth.ts (expired tokens should trigger a refresh attempt, not immediately return 401). Then add rate limiting to /posts and write integration tests. Hard constraint: do not change response shapes — the mobile client depends on them."

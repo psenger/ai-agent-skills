@@ -1,0 +1,16 @@
+Handoff written to: db-schema-work.json
+
+Summary:
+- Task: Design and implement a PostgreSQL schema for a multi-tenant SaaS application with row-level security and CockroachDB migration compatibility.
+- Completed: 7 steps
+- Pending: 5 steps
+- Constraints: 2
+- Open issues: 2
+- Modified files: 3
+
+Next steps:
+1. Run /clear to wipe the context window
+2. Start a new session
+3. Paste this prompt to resume:
+
+"I'm resuming work on a multi-tenant SaaS PostgreSQL schema. Load the handoff file db-schema-work.json for full context. In summary: three migration files (001_initial.sql, 002_rls_policies.sql, 003_indexes.sql) are written using RLS for tenant isolation, UUID PKs, and JSONB metadata. The schema must stay CockroachDB-compatible. Next I need to: (1) write the seed data script, (2) document the RLS policy logic, and (3) benchmark query performance under 1000 tenants. Please start with the seed data script."

@@ -1,0 +1,77 @@
+{
+  "schema_version": "2.0.0",
+  "generated_at": "2026-04-25T00:00:00Z",
+  "task": {
+    "goal": "Design and implement a PostgreSQL schema for a multi-tenant SaaS application with row-level security and CockroachDB migration compatibility.",
+    "acceptance_criteria": [
+      "Schema enforces tenant isolation via RLS policies",
+      "UUID primary keys used throughout",
+      "JSONB used for flexible metadata columns",
+      "All migration files applied cleanly (001, 002, 003)",
+      "Seed data script exists and runs without errors",
+      "RLS policy logic is documented",
+      "Query performance benchmarked under 1000-tenant load",
+      "Schema uses only data types supported by CockroachDB"
+    ]
+  },
+  "current_state": "Three migration files have been written covering the initial schema (001_initial.sql), RLS policies (002_rls_policies.sql), and indexes (003_indexes.sql). Key architectural decisions are finalised: RLS for tenant isolation, UUID primary keys, and JSONB for flexible metadata. The schema has not yet been seeded, the RLS policy logic lacks written documentation, and no performance benchmarks have been run.",
+  "completed_steps": [
+    "Decided on row-level security (RLS) over separate per-tenant schemas",
+    "Settled on UUID primary keys for all tables",
+    "Chose JSONB over EAV for flexible metadata columns",
+    "Wrote 001_initial.sql — initial schema migration",
+    "Wrote 002_rls_policies.sql — RLS policy definitions",
+    "Wrote 003_indexes.sql — index creation migration",
+    "Identified CockroachDB compatibility as a hard constraint and validated type choices against it"
+  ],
+  "pending_steps": [
+    "Write the seed data script for development and testing",
+    "Document the RLS policy logic (which policies exist, what they enforce, and why)",
+    "Benchmark query performance under a simulated 1000-tenant load",
+    "Verify all migration files apply cleanly in sequence on a fresh database",
+    "Confirm each data type used is supported by CockroachDB"
+  ],
+  "constraints": [
+    "Schema must be compatible with eventual migration to CockroachDB — no PostgreSQL-specific types unsupported by CockroachDB (e.g. avoid SERIAL in favour of UUID, avoid pg-specific range types if CockroachDB lacks them)",
+    "Tenant isolation must be enforced at the database level via RLS, not application logic alone"
+  ],
+  "discovered_issues": [
+    "RLS policy logic has not been documented — intent and coverage of each policy is currently implicit in SQL only",
+    "No performance validation has been done; behaviour under 1000+ tenants is unknown"
+  ],
+  "modified_files": [
+    {
+      "path": "migrations/001_initial.sql",
+      "status": "created",
+      "note": "Initial schema: tables with UUID PKs and JSONB metadata column"
+    },
+    {
+      "path": "migrations/002_rls_policies.sql",
+      "status": "created",
+      "note": "Row-level security policies for tenant isolation"
+    },
+    {
+      "path": "migrations/003_indexes.sql",
+      "status": "created",
+      "note": "Index definitions to support multi-tenant query patterns"
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "Use row-level security (RLS) for tenant isolation rather than separate schemas per tenant",
+      "rationale": "Separate schemas multiply infrastructure cost and operational complexity; RLS keeps a single schema while enforcing tenant boundaries at the database level",
+      "alternatives_rejected": ["Separate PostgreSQL schema per tenant", "Application-layer tenant filtering only"]
+    },
+    {
+      "decision": "Use UUID primary keys throughout",
+      "rationale": "UUIDs are portable, avoid sequential ID leakage across tenants, and are natively supported by CockroachDB",
+      "alternatives_rejected": ["SERIAL / BIGSERIAL auto-increment integers (PostgreSQL-specific and not recommended in CockroachDB)"]
+    },
+    {
+      "decision": "Use JSONB for the flexible metadata column",
+      "rationale": "JSONB allows schema-flexible per-tenant attributes without the query complexity and join overhead of an EAV model; CockroachDB supports JSONB",
+      "alternatives_rejected": ["Entity-Attribute-Value (EAV) pattern", "Plain TEXT JSON column without binary indexing"]
+    }
+  ],
+  "resume_prompt": "I'm resuming work on a multi-tenant SaaS PostgreSQL schema. Load the handoff file db-schema-work.json for full context. In summary: three migration files (001_initial.sql, 002_rls_policies.sql, 003_indexes.sql) are written using RLS for tenant isolation, UUID PKs, and JSONB metadata. The schema must stay CockroachDB-compatible. Next I need to: (1) write the seed data script, (2) document the RLS policy logic, and (3) benchmark query performance under 1000 tenants. Please start with the seed data script."
+}

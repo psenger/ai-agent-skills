@@ -1,0 +1,186 @@
+Loaded handoff: handoff-fixture.json
+
+- Task: Migrate all React class components in src/components/ to functional components with hooks
+- Completed: 3 steps
+- Pending: 6 steps
+- First step: Migrate UserProfile component — has getDerivedStateFromProps, convert to useEffect + ref pattern
+- Open issues: 2
+- Constraints: 3
+
+---
+
+Beginning work on pending_steps[0]: Migrate UserProfile component
+
+The discovered issue notes that getDerivedStateFromProps in UserProfile.tsx syncs URL params
+into state, and the conversion must use useEffect + useRef to avoid an infinite loop.
+
+Constraints in force:
+- Must not change the public props API — callers must not need updating
+- Test files must not be modified
+- React is locked at 17.0.2
+
+---
+
+MIGRATION: src/components/UserProfile.tsx
+
+The class component pattern being replaced looks like this:
+
+  class UserProfile extends React.Component<Props, State> {
+    static getDerivedStateFromProps(props: Props, state: State): Partial<State> | null {
+      if (props.urlParams.userId !== state.lastSeenUserId) {
+        return {
+          userId: props.urlParams.userId,
+          lastSeenUserId: props.urlParams.userId,
+        };
+      }
+      return null;
+    }
+
+    state: State = {
+      userId: this.props.urlParams.userId,
+      lastSeenUserId: this.props.urlParams.userId,
+    };
+
+    componentDidMount() {
+      this.fetchUser(this.state.userId);
+    }
+
+    componentDidUpdate(prevProps: Props) {
+      if (prevProps.urlParams.userId !== this.props.urlParams.userId) {
+        this.fetchUser(this.props.urlParams.userId);
+      }
+    }
+
+    componentWillUnmount() {
+      this.cancelPendingRequests();
+    }
+    ...
+  }
+
+Why getDerivedStateFromProps creates an infinite loop risk in hooks:
+- getDerivedStateFromProps fires on every render to keep state in sync with props.
+- A naive translation using useState + setState inside render would trigger a re-render
+  on every call, causing an infinite loop.
+- The correct pattern is: derive the value directly from props (no state copy needed),
+  OR use a ref to track the "previous" prop value and only call setState (triggering
+  a re-render) when the value actually changes.
+
+In this specific case (syncing urlParams.userId into state):
+- The state copy of userId only existed so getDerivedStateFromProps could track whether
+  it had changed. That tracking role is replaced by useRef.
+- The fetch side-effect (previously split across componentDidMount and componentDidUpdate)
+  collapses into a single useEffect with [userId] as its dependency.
+- Cleanup (componentWillUnmount) moves into the useEffect cleanup return.
+
+CONVERTED FUNCTIONAL COMPONENT:
+
+  import React, { useState, useEffect, useRef, useCallback } from 'react';
+
+  // Props interface — unchanged to preserve the public API
+  interface Props {
+    urlParams: { userId: string };
+    // ...any other existing props
+  }
+
+  const UserProfile: React.FC<Props> = ({ urlParams, ...rest }) => {
+    // Derive userId directly from props — no need to mirror it into state.
+    // This eliminates the getDerivedStateFromProps pattern entirely.
+    const userId = urlParams.userId;
+
+    // useRef holds a mutable value that does NOT trigger re-renders when changed.
+    // We use it to track the abort controller for in-flight requests so cleanup
+    // works correctly across re-renders (replaces cancelPendingRequests logic).
+    const abortControllerRef = useRef<AbortController | null>(null);
+
+    // Local UI state (loading, error, data) — unrelated to the GDSP pattern.
+    const [userData, setUserData] = useState<UserData | null>(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<Error | null>(null);
+
+    const fetchUser = useCallback(async (id: string) => {
+      // Cancel any in-flight request before starting a new one.
+      abortControllerRef.current?.abort();
+      const controller = new AbortController();
+      abortControllerRef.current = controller;
+
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await fetchUserById(id, { signal: controller.signal });
+        if (!controller.signal.aborted) {
+          setUserData(data);
+        }
+      } catch (err) {
+        if (!controller.signal.aborted) {
+          setError(err as Error);
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
+      }
+    }, []); // no deps — fetchUserById is a stable module-level import
+
+    // Single useEffect replaces componentDidMount + componentDidUpdate + getDerivedStateFromProps.
+    // Runs on mount and whenever userId changes — exactly the class component behaviour.
+    useEffect(() => {
+      fetchUser(userId);
+
+      // Cleanup replaces componentWillUnmount — aborts any in-flight request.
+      return () => {
+        abortControllerRef.current?.abort();
+      };
+    }, [userId, fetchUser]);
+
+    // Render output is identical to the class component's render() method.
+    // Props API is unchanged — callers pass the same props as before.
+    if (loading) return <Spinner />;
+    if (error) return <ErrorMessage error={error} />;
+    if (!userData) return null;
+
+    return (
+      <div className="user-profile">
+        {/* ...same JSX as before... */}
+      </div>
+    );
+  };
+
+  export default UserProfile;
+
+KEY DECISIONS for this migration:
+
+1. Eliminated the state mirror of userId entirely.
+   - getDerivedStateFromProps existed solely to copy urlParams.userId into state so
+     componentDidUpdate could compare old vs new. In a functional component, the prop
+     IS the value — no copy needed. Reading urlParams.userId directly from props on
+     every render is safe and correct.
+
+2. useRef for the abort controller (not useState).
+   - The abort controller is imperative infrastructure, not UI state. Storing it in a
+     ref means updating it never triggers a re-render, which avoids the infinite loop
+     that would result from putting it in useState.
+
+3. Single useEffect with [userId] dependency collapses three lifecycle methods.
+   - componentDidMount  → runs on mount (empty dep array would also work, but [userId]
+     correctly re-fetches if userId changes before mount completes in concurrent mode).
+   - getDerivedStateFromProps + componentDidUpdate → React re-runs the effect whenever
+     userId changes, which is exactly when the class component triggered a fetch.
+   - componentWillUnmount → the cleanup function returned from useEffect.
+
+4. No infinite loop risk.
+   - The only state setters called inside the effect are setUserData, setLoading, and
+     setError. None of these are in the dependency array, so changing them does not
+     re-trigger the effect. userId comes from props and only changes when the caller
+     passes a new value — matching the class component's behaviour exactly.
+
+5. Public props API preserved.
+   - The component still accepts { urlParams: { userId: string }, ...rest } — no
+     caller changes required. This satisfies constraint #1.
+
+6. Test files untouched.
+   - No test file changes are needed or made. This satisfies constraint #2.
+
+---
+
+Next pending step (after UserProfile is merged and tests confirmed):
+  Migrate NotificationList component — uses componentDidMount for WebSocket subscription
