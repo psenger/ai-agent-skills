@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-04-25
+
 ### Added
 
 - **handoff** — New skill that saves or loads a structured JSON snapshot of session state (schema v2.0.0) so work can resume cleanly in a new session or be handed to a sub-agent. Supports CREATE (default timestamped path or explicit filename) and RESUME (load most-recent or named file) workflows. Proactively suggests a handoff after 5+ file edits or a major decision. ([#14](https://github.com/psenger/ai-agent-skills/issues/14))
@@ -64,7 +66,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **git-commit-pr-message** — Git commit, PR, and changelog workflow skill
 - Initial project structure and README
 
-[Unreleased]: https://github.com/psenger/ai-agent-skills/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/psenger/ai-agent-skills/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/psenger/ai-agent-skills/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/psenger/ai-agent-skills/compare/v0.6.0...v1.0.0
 [0.6.0]: https://github.com/psenger/ai-agent-skills/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/psenger/ai-agent-skills/compare/v0.4.0...v0.5.0
