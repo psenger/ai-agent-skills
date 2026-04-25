@@ -1,5 +1,6 @@
 ---
 name: release
+publish: false
 description: >
   Ships completed work in the ai-agent-skills repository. Two phases depending on
   context: WRAP UP (on a feature branch with committed work — updates CHANGELOG,
