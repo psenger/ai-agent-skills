@@ -1,0 +1,77 @@
+[
+  {
+    "query": "Here's a standard I wrote for my agent-os profile, is it any good?\n\nAlways use descriptive variable names.",
+    "should_trigger": true,
+    "notes": "Pasted standard with agent-os context — strongest trigger, Claude has content to evaluate"
+  },
+  {
+    "query": "Can you review my agent-os profile and tell me what's wrong?",
+    "should_trigger": true,
+    "notes": "Profile review request with agent-os keyword"
+  },
+  {
+    "query": "audit my agent-os profile at ~/agent-os/profiles/my-company/ and give me a severity-tagged report",
+    "should_trigger": true,
+    "notes": "Audit with a real path — Claude has something concrete to inspect, avoids the bare-command trap"
+  },
+  {
+    "query": "Is this agent-os standard any good?\n\n# Error Handling\n\nAlways handle errors gracefully.",
+    "should_trigger": true,
+    "notes": "Second pasted-standard variant — no leading context beyond agent-os keyword"
+  },
+  {
+    "query": "I think my agent-os profile has some v2 artifacts in it, can you check?",
+    "should_trigger": true,
+    "notes": "v2 artifact concern — specific enough that Claude should reach for the checklist"
+  },
+  {
+    "query": "Set up a new Node.js project structure with Express and TypeScript",
+    "should_trigger": false,
+    "notes": "General project scaffolding, no Agent OS context"
+  },
+  {
+    "query": "Audit my package.json for outdated dependencies and security issues",
+    "should_trigger": false,
+    "notes": "Audit keyword but unrelated to Agent OS"
+  },
+  {
+    "query": "Help me write a coding standard document for our team's React work",
+    "should_trigger": false,
+    "notes": "Standard keyword but no Agent OS context, generic team doc"
+  },
+  {
+    "query": "How do I configure my .eslintrc.yml for monorepo workspaces?",
+    "should_trigger": false,
+    "notes": "Config file question but unrelated tool"
+  },
+  {
+    "query": "Review this REST API design and tell me where the security holes are",
+    "should_trigger": false,
+    "notes": "Review keyword but API design domain, not Agent OS"
+  },
+  {
+    "query": "What's the best operating system for running coding agents locally?",
+    "should_trigger": false,
+    "notes": "Literal 'operating system' near-miss for 'agent os'"
+  },
+  {
+    "query": "Create a config.yml for my GitHub Actions deployment workflow",
+    "should_trigger": false,
+    "notes": "config.yml near-miss, wrong product context"
+  },
+  {
+    "query": "Write me an OpenAPI spec for the /users endpoint",
+    "should_trigger": false,
+    "notes": "Spec keyword but OpenAPI, not Agent OS"
+  },
+  {
+    "query": "How do I customize my GitHub profile README?",
+    "should_trigger": false,
+    "notes": "Profile keyword in unrelated context"
+  },
+  {
+    "query": "Set up a CI/CD pipeline spec for our staging deployment",
+    "should_trigger": false,
+    "notes": "Spec plus setup keywords but DevOps domain, not Agent OS"
+  }
+]
