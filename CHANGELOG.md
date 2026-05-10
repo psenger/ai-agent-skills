@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-05-10
+
 ### Added
 
 - **agent-os-assist** — New skill for Agent OS v3 installation, slash commands, profiles, and ticket-to-spec workflows; includes trigger evals and workspace infrastructure. ([#21](https://github.com/psenger/ai-agent-skills/issues/21))
@@ -84,6 +86,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial project structure and README
 
 [Unreleased]: https://github.com/psenger/ai-agent-skills/compare/v1.1.2...HEAD
+[unreleased]: https://github.com/psenger/ai-agent-skills/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/psenger/ai-agent-skills/compare/v1.1.2...v1.2.0
 [1.1.2]: https://github.com/psenger/ai-agent-skills/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/psenger/ai-agent-skills/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/psenger/ai-agent-skills/compare/v1.0.0...v1.1.0
