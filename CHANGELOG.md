@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **agent-os-assist** — New skill for Agent OS v3 installation, slash commands, profiles, and ticket-to-spec workflows; includes trigger evals and workspace infrastructure. ([#21](https://github.com/psenger/ai-agent-skills/issues/21))
+- **agent-os-profile-critique** — New skill that audits and critiques Agent OS v3 profiles and standards with severity-tagged findings (blocking, warning, suggestion); includes review checklists and trigger evals. ([#21](https://github.com/psenger/ai-agent-skills/issues/21))
+
 ## [1.1.2] - 2026-04-25
 
 ### Fixed
