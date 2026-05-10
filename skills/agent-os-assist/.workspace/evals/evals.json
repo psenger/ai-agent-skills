@@ -1,0 +1,32 @@
+{
+  "skill_name": "agent-os-assist",
+  "evals": [
+    {
+      "id": 1,
+      "name": "explain-inheritance-uses-correct-file",
+      "prompt": "How does profile inheritance work in Agent OS? Where do I configure that one profile inherits from another?",
+      "expected_output": "Explains that inheritance is configured in ~/agent-os/config.yml at the base install, not in any per-profile file. Names the inherits_from field. States that child profile files override parent files when filenames collide. Explicitly warns against using profile-config.yml because that is a v2 artifact.",
+      "files": [],
+      "expectations": [
+        "The answer names ~/agent-os/config.yml as the file where inheritance is configured",
+        "The answer references the inherits_from field or equivalent inheritance directive",
+        "The answer states that child overrides parent when filenames collide",
+        "The answer does NOT recommend using profile-config.yml",
+        "The answer flags profile-config.yml as a v2 artifact if it appears in the user's mental model"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "recover-broken-spec-without-losing-history",
+      "prompt": "I ran /shape-spec on a feature an hour ago and the spec it produced is wrong — wrong scope, missing constraints. I don't want to throw away the conversation history. How do I recover?",
+      "expected_output": "Diagnoses which layer is broken (shape vs. plan vs. standards vs. drift). Recommends a recovery path that preserves history: edit the spec file directly or re-run /shape-spec with refined input rather than discarding the session. Reads references/getting-started.md or references/commands.md before answering.",
+      "files": [],
+      "expectations": [
+        "The answer distinguishes between shape, plan, standards, and drift as possible failure layers",
+        "The answer recommends preserving history rather than starting over",
+        "The answer suggests editing the spec file directly or re-running /shape-spec with refined inputs",
+        "The answer does not invent commands or flags not listed in references/commands.md"
+      ]
+    }
+  ]
+}

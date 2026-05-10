@@ -1,0 +1,25 @@
+{
+  "skill_name": "agent-os-profile-critique",
+  "evals": [
+    {
+      "id": 1,
+      "name": "audit-v2-profile-flags-artifacts",
+      "prompt": "Audit the Agent OS profile at .workspace/evals/files/v2-profile/ and give me severity-tagged findings.",
+      "expected_output": "Identifies the profile as a v2 install because it contains profile-config.yml. Reports a blocking finding referencing profile-config.yml and explains that v3 moves inheritance to ~/agent-os/config.yml. Critiques standards/python-style.md for restating framework defaults (PEP 8), missing a leading rule, and missing code examples. Returns findings as a list with severity (blocking, warning, or suggestion), the specific file, and a concrete fix for each.",
+      "files": [
+        ".workspace/evals/files/v2-profile/profile-config.yml",
+        ".workspace/evals/files/v2-profile/standards/python-style.md"
+      ],
+      "expectations": [
+        "The output flags profile-config.yml as a v2 artifact",
+        "The output recommends moving inheritance configuration to ~/agent-os/config.yml",
+        "The output critiques python-style.md for restating PEP 8 / framework defaults",
+        "The output notes python-style.md lacks a code example",
+        "The output notes python-style.md does not lead with a clear rule on line 1",
+        "Each finding includes a severity label (blocking, warning, or suggestion)",
+        "Each finding cites a specific file path",
+        "Each finding includes a concrete fix recommendation"
+      ]
+    }
+  ]
+}

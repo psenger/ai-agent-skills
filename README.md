@@ -34,6 +34,8 @@ Think of it as a playbook: you define the process once, and the agent follows it
 | **[review-api-design](skills/review-api-design/)** | `/review-api-design` | Reviews REST API designs during the planning phase against security, resilience, design, and operational best practices — produces structured findings with severity levels, source citations, and a readiness assessment |
 | **[create-a-skill](skills/create-a-skill/)** | `/create-a-skill` | Create new agent skills from scratch, modify and improve existing skills, and measure skill performance — interviews the user, drafts SKILL.md with bundled resources, runs evals, benchmarks, iterates on feedback, optimises description triggering, and packages distributable `.skill` files |
 | **[handoff](skills/handoff/)** | `/handoff` | Saves or loads a structured JSON snapshot of session state so work can resume cleanly in a new session or be delegated to a sub-agent — better than `/compact` because the schema forces every field to be explicit |
+| **[agent-os-assist](skills/agent-os-assist/)** | `/agent-os-assist` | Agent OS v3 reference for installation, slash commands, profiles, and ticket-to-spec workflows — holds version-specific documentation not in Claude's training and routes pre-3.0 installs to the migration reference |
+| **[agent-os-profile-critique](skills/agent-os-profile-critique/)** | `/agent-os-profile-critique` | Audits and critiques Agent OS v3 profiles and standards — produces severity-tagged findings (blocking, warning, suggestion) with concrete fix recommendations |
 
 ### vault-scribe
 
@@ -531,6 +533,89 @@ Captures the complete state of your current session to a structured JSON snapsho
 /handoff                          # save to .claude/handoffs/<timestamp>-<slug>.json
 /handoff auth-refactor.json       # save to explicit path
 /handoff load auth-refactor.json  # resume from file
+```
+
+### agent-os-assist
+
+Your Agent OS v3 reference. Covers installation, slash commands, profiles, standards, and ticket-to-spec workflows — with the version-specific documentation not in Claude's training data.
+
+**Use cases:**
+
+- Bootstrap a fresh Agent OS v3 install end-to-end
+- Turn a Jira or GitHub ticket into a `/shape-spec` run
+- Configure profile inheritance in `~/agent-os/config.yml`
+- Write your first standard after installing Agent OS
+- Recover a broken spec without losing conversation history
+- Migrate from v2 artifacts to v3 conventions
+
+```
+/agent-os-assist
+```
+
+Or trigger it naturally:
+
+```
+"How do I install Agent OS?"
+"Turn this GitHub issue into an Agent OS spec"
+"What should be in ~/agent-os/config.yml?"
+"I just installed agent-os, where do I start?"
+"My spec is wrong — how do I recover without losing history?"
+```
+
+**Note:** This skill is difficult to trigger reliably from natural language alone — invoke it explicitly with `/agent-os-assist` for best results.
+
+```
+agent-os-assist/
+├── SKILL.md                          Routing table + workflow overview
+└── references/
+    ├── getting-started.md            Bootstrap and onboarding workflows
+    ├── installation.md               Install and scaffold steps
+    ├── commands.md                   Slash command reference
+    ├── profiles.md                   Profile structure and inheritance
+    ├── standards.md                  Writing and managing standards
+    ├── standards-vs-skills.md        When to use a standard vs a skill
+    ├── file-structure.md             v3 directory layout
+    └── v2-vs-v3.md                   Migration reference and v2 artifact flags
+```
+
+### agent-os-profile-critique
+
+Your Agent OS profile audit assistant. Reviews profiles and standards files against v3 conventions and produces severity-tagged findings with concrete rewrite suggestions.
+
+**Severity levels:**
+
+| Level | Meaning |
+|---|---|
+| Blocking | Must fix before the profile is usable |
+| Warning | Should fix; degrades AI effectiveness or causes drift |
+| Suggestion | Improves clarity, context-window efficiency, or maintainability |
+
+```
+/agent-os-profile-critique
+```
+
+Or trigger it naturally:
+
+```
+"Audit my Agent OS profile"
+"Review this standard — is it any good?"
+"Critique my agent-os setup"
+"What's wrong with this standards file?"
+"Validate my profile against v3 conventions"
+```
+
+**Note:** This skill is difficult to trigger reliably from natural language alone — invoke it explicitly with `/agent-os-profile-critique` for best results.
+
+```
+agent-os-profile-critique/
+├── SKILL.md                          Routing table + audit workflow
+└── references/
+    ├── review-checklists.md          Severity-tagged audit checklists
+    ├── standards.md                  Standards quality criteria
+    ├── file-structure.md             v3 directory layout reference
+    ├── profiles.md                   Profile conventions
+    ├── standards-vs-skills.md        Standards vs skills decision guide
+    └── v2-vs-v3.md                   v2 artifact detection patterns
 ```
 
 ---

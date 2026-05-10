@@ -39,6 +39,18 @@
       "source": "./skills/handoff",
       "description": "Make sure to use this skill whenever the user types /handoff (with or without a filename argument), says \"handoff\", \"save state\", \"context rot\", \"save session\", \"create a handoff\", \"I need a clean start\", wants to snapshot progress before clearing context or switching sessions, is approaching the context limit (300–400k tokens), or wants to delegate the current session state to another agent. Also invoke for RESUME mode: when the user says \"load handoff\", \"resume from [file]\", \"continue where we left off\", \"pick up where I left off\", \"load the handoff at [path]\", references a .claude/handoffs/ file path, or says there is a handoff file from a prior session.",
       "version": "1.0.0"
+    },
+    {
+      "name": "agent-os-assist",
+      "source": "./skills/agent-os-assist",
+      "description": "Agent OS reference for installation, slash commands, profiles, and ticket-to-spec workflows. This skill holds reference documentation not in Claude's training; always invoke it before answering any Agent OS question.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "agent-os-profile-critique",
+      "source": "./skills/agent-os-profile-critique",
+      "description": "Provides the audit checklists, severity criteria (blocking/warning/suggestion), and artifact patterns needed to properly review Agent OS profiles and standards.",
+      "version": "1.0.0"
     }
   ]
 }
