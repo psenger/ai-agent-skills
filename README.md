@@ -562,6 +562,8 @@ Or trigger it naturally:
 "My spec is wrong — how do I recover without losing history?"
 ```
 
+**Note:** This skill is difficult to trigger reliably from natural language alone — invoke it explicitly with `/agent-os-assist` for best results.
+
 ```
 agent-os-assist/
 ├── SKILL.md                          Routing table + workflow overview
@@ -601,6 +603,8 @@ Or trigger it naturally:
 "What's wrong with this standards file?"
 "Validate my profile against v3 conventions"
 ```
+
+**Note:** This skill is difficult to trigger reliably from natural language alone — invoke it explicitly with `/agent-os-profile-critique` for best results.
 
 ```
 agent-os-profile-critique/
