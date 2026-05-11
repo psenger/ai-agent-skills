@@ -83,7 +83,12 @@ Bullet format (see `conventions` skill):
 - Add a row to the skills table
 - Add a `### skill-name` prose section following the existing pattern
 
-**`.claude-plugin/marketplace.json`** — only if a new skill was added:
+**`.claude-plugin/marketplace.json`** — update whenever a skill was added or modified:
+- New skill → add an entry with `"version": "1.0.0"`
+- Existing skill enhanced (new feature, new behaviour) → bump `minor` (e.g. `1.0.0` → `1.1.0`)
+- Existing skill bug fix or docs only → bump `patch` (e.g. `1.1.0` → `1.1.1`)
+
+New skill entry format:
 ```json
 {
   "name": "<skill-name>",
