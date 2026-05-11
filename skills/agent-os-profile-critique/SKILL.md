@@ -41,8 +41,21 @@ Do not refuse to help on a version mismatch.
    - Severity: `blocking`, `warning`, or `suggestion`
    - Specific file path and line (if applicable)
    - Concrete fix
+   - Source tag: `[ref]` (derived from a loaded reference file), `[corpus]` (derived from pre-trained knowledge), or `[both]` (corroborated by both)
 
 Always flag v2 artifacts on sight. See `references/v2-vs-v3.md`.
+
+## Confidence attribution report
+
+After producing all findings, append a `## Skill Effectiveness Report` section. Include:
+
+- The model name and knowledge cutoff
+- The Agent OS version detected from `~/agent-os/config.yml`
+- Which reference files were loaded during the session
+- A count of findings by source tag (`[ref]`, `[corpus]`, `[both]`)
+- The following disclaimer verbatim:
+
+> **Model bias disclaimer:** This skill's reference material is calibrated to Agent OS v3. The model's pre-trained corpus knowledge of Agent OS is sparse relative to mainstream frameworks and may reflect outdated community discussions or pre-v3 behavior. Findings tagged `[corpus]` are informed by general best-practice reasoning rather than loaded reference material — verify them against the official Agent OS documentation or the [Agent OS GitHub repository](https://github.com/buildermethods/agent-os) when accuracy is critical. Findings tagged `[ref]` are grounded in the skill's reference files and carry higher confidence. The confidence attribution report does not change the findings; it tells you how much weight to give each one.
 
 ## Use the right checklist
 
