@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **agent-os-profile-critique** — Add confidence attribution report: each audit finding is now source-tagged (`[ref]`, `[corpus]`, `[both]`) and a Skill Effectiveness Report with model bias disclaimer is appended after every audit. Adds `README.md` documenting all skill capabilities. ([#23](https://github.com/psenger/ai-agent-skills/issues/23))
+
 ## [1.2.0] - 2026-05-10
 
 ### Added
