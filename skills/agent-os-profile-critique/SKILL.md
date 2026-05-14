@@ -34,16 +34,27 @@ Do not refuse to help on a version mismatch.
 
 ## Audit workflow
 
-1. Confirm the target: a profile directory (`~/agent-os/profiles/<name>/`), a project's `agent-os/` folder, or a pasted standard file.
-2. Read what exists before recommending changes. Run `ls`, read `index.yml`, sample a few standards files.
-3. Pull the relevant reference from the table above.
-4. Produce a findings list. Each finding must include:
+1. **Identify the audit target.** There are three structurally distinct targets and findings valid for one are often impossible for another. Auto-detect via filesystem signals (see `references/file-structure.md` for the detection table):
+   - **Target A** — single profile source directory (`~/agent-os/profiles/<name>/` or a checked-out single profile). Two valid layouts (`standards/` wrapper, or domain folders at profile root).
+   - **Target B** — project install. cwd contains `agent-os/standards/index.yml`. The `standards/` dir here is a merged artifact from an inheritance chain, not a copy of any single profile.
+   - **Target C** — enterprise profiles repository. Multiple profile-shaped dirs at repo root (or under a `profiles/` wrapper), no `index.yml`. Each profile follows Target A schema.
+
+   If signals are ambiguous (e.g. a bare directory with a single `standards/` and no `index.yml` could be Target A), ask the user.
+
+2. **Read what exists before recommending changes.** Run `ls`, read `index.yml` if Target B, sample a few standards files.
+3. **Pull the relevant reference** from the table above. For target-specific checklists, always read `references/review-checklists.md`.
+4. **Resolve inheritance, if any.** Read `~/agent-os/config.yml` (or the Target C repo's local `config.yml`). If the audited profile is part of an inheritance chain, walk the chain end-to-end. If the audit is Target B, recover the chain from `config.yml` and walk each contributing profile in `~/agent-os/profiles/`. If no inheritance is declared, skip the coherence audit.
+5. **Produce a findings list.** Open the report with `## Audit target: <A | B | C> — <path>` so a wrong detection is visible to the user and correctable. Each finding must include:
    - Severity: `blocking`, `warning`, or `suggestion`
    - Specific file path and line (if applicable)
    - Concrete fix
    - Source tag: `[ref]` (derived from a loaded reference file), `[corpus]` (derived from pre-trained knowledge), or `[both]` (corroborated by both)
 
 Always flag v2 artifacts on sight. See `references/v2-vs-v3.md`.
+
+**Do not produce findings that are structurally impossible for the detected target.** Each target's checklist in `references/review-checklists.md` lists the false-positive findings to avoid (e.g. missing `index.yml` is blocking in Target B but invalid in Targets A and C).
+
+**When inheritance exists, append an `## Inheritance coherence` section** after the structural findings. It contains a contribution map (per-file table of which profile contributed each standard and where it's overridden) and findings for generality leaks, override saturation, and cross-level conflicts. See `references/review-checklists.md` for the procedure and output format.
 
 ## Confidence attribution report
 
@@ -59,10 +70,12 @@ After producing all findings, append a `## Skill Effectiveness Report` section. 
 
 ## Use the right checklist
 
-Read `references/review-checklists.md` and apply:
-- Profile review: auditing `~/agent-os/profiles/<name>/`
-- Project setup review: auditing a repo's `agent-os/` and `.claude/commands/agent-os/`
-- Standards quality audit: line-by-line review of a standard file
+Read `references/review-checklists.md` and apply the checklist for the detected target:
+- **Target A** — single profile source directory (`~/agent-os/profiles/<name>/`)
+- **Target B** — project install (a repo containing `agent-os/standards/index.yml`)
+- **Target C** — enterprise profiles repository (multiple profile dirs, no `index.yml`)
+
+The **standards quality lens** in the same file applies inside any target when reviewing individual `.md` standards files.
 
 ## Quality bar for standards
 

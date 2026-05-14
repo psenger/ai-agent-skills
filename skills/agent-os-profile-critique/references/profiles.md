@@ -1,13 +1,22 @@
 # Profiles
 
-A **profile** is a named folder under `~/agent-os/profiles/<name>/` containing a `standards/` subfolder of `.md` files.
+A **profile** is a named folder under `~/agent-os/profiles/<name>/` (or inside an enterprise profiles repo) containing `.md` standards files.
 
 ## Rules
 
-- Any directory under `~/agent-os/profiles/` containing `standards/` is a valid profile. No registration step.
+- Any directory under `~/agent-os/profiles/` containing standards content is a valid profile. No registration step.
 - The `profiles:` section in `~/agent-os/config.yml` only declares **inheritance**. Omitting a profile from `config.yml` means it stands alone.
 - When inheriting, child profiles override parents file-by-file: same filename in both → child wins.
-- Profiles in v3 contain **only `standards/`**. No `agents/`, no `commands/`, no `workflows/`, no `profile-config.yml`.
+- Profiles in v3 contain **standards content only**. No `agents/`, no `commands/`, no `workflows/`, no `profile-config.yml`.
+
+## Two valid profile layouts
+
+The audit accepts both layouts. See `file-structure.md` for full schemas.
+
+- **Layout A1 — `standards/` wrapper.** Domain folders live under `<profile>/standards/<domain>/`. This is the canonical v3 layout and what `project-install.sh` reads from when building a project install.
+- **Layout A2 — domain folders at profile root.** No `standards/` wrapper; domain folders sit directly under `<profile>/<domain>/`. This is the layout of the upstream `default` profile shipped with Agent OS.
+
+A Layout-A2 profile cannot be installed by `project-install.sh` as-is (the script resolves `<profile>/standards/` and finds nothing). If the user intends to install a Layout-A2 profile, flag it.
 
 ## config.yml format
 
@@ -22,6 +31,16 @@ profiles:
 ```
 
 Three-level inheritance is fine; deeper chains start to be a smell.
+
+### Inheritance coherence
+
+A chain like `base → php → symfony` should flow **general to specific**. Configuration declares the chain; coherence is whether the content actually respects that direction. Common incoherence patterns:
+
+- **Generality leak** — a root profile contains content specific to a single descendant's stack (e.g. `base` declares "PHP 5.4"). A future sibling Node.js child cannot inherit cleanly.
+- **Override saturation** — a parent file is overridden by every descendant in the chain. The parent's version is dead weight; the file probably belongs in the children or in a deleted state.
+- **Cross-level conflict** — a parent rule and a child rule are semantically incompatible. The override mechanism resolves it for the *known* child, but any future sibling that doesn't override inherits the wrong rule by default.
+
+The audit reads the chain and surfaces these as findings in a dedicated `## Inheritance coherence` section. See `review-checklists.md` for the full procedure and contribution-map output format.
 
 ## Common naming patterns
 
@@ -48,16 +67,10 @@ Extend (inherit from) an existing profile when:
 Three workable patterns:
 1. **Commit `agent-os/standards/` per project.** Lowest setup cost, but duplication across repos.
 2. **Shared profile name.** Every team member maintains the same profile name locally; sync via `sync-to-profile.sh`.
-3. **Dedicated standards repo.** Clone into `~/agent-os/profiles/<name>/` and treat the profile as a versioned artifact.
+3. **Dedicated profiles repo (Target C).** A standalone git repo containing one or more profiles, cloned into `~/agent-os/profiles/`. See `file-structure.md` for the Target C schema.
 
 Pattern 3 scales best for organizations.
 
 ## Auditing a profile
 
-When asked to review `~/agent-os/profiles/<name>/`:
-
-1. Confirm `standards/` exists with `.md` files
-2. Flag any v2 artifacts (`agents/`, `commands/`, `workflows/`, `profile-config.yml`)
-3. Read `~/agent-os/config.yml`. Verify `version: 3.0.0`; if `inherits_from` is set, verify the parent folder exists.
-4. Apply the standards quality rules (see `standards.md`)
-5. Flag standards that document obvious framework behavior
+See `review-checklists.md` for the target-specific checklist. Profile source dirs are Target A; project installs are Target B; multi-profile enterprise repos are Target C.
