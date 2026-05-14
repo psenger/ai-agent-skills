@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **agent-os-profile-critique** — Three-target audit framework: schema and dedicated checklist for each of profile source directory (Target A, both `standards/`-wrapper and domain-at-root layouts), project install (Target B, called out as a merged artifact with a generated `index.yml`), and enterprise profiles repository (Target C, either `profiles/` wrapper or flat layout). Each checklist lists findings that are structurally impossible for that target so they are no longer produced. Workflow now auto-detects the target via filesystem signals and opens the findings report with the detected target so a misdetection is visible and correctable. Adds inheritance coherence audit: when `config.yml` declares a chain, the audit walks every contributor, builds a per-file contribution map, and surfaces generality leaks, override saturation, cross-level conflicts, and naming mismatches that the override mechanism otherwise hides. ([#27](https://github.com/psenger/ai-agent-skills/issues/27))
+
 ## [1.3.1] - 2026-05-12
 
 ### Fixed
