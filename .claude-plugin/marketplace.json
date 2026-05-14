@@ -41,12 +41,6 @@
       "version": "1.0.0"
     },
     {
-      "name": "agent-os-assist",
-      "source": "./skills/agent-os-assist",
-      "description": "Agent OS reference for installation, slash commands, profiles, and ticket-to-spec workflows. This skill holds reference documentation not in Claude's training; always invoke it before answering any Agent OS question.",
-      "version": "1.0.0"
-    },
-    {
       "name": "agent-os-profile-critique",
       "source": "./skills/agent-os-profile-critique",
       "description": "Provides the audit checklists, severity criteria (blocking/warning/suggestion), and artifact patterns needed to properly review Agent OS profiles and standards.",
