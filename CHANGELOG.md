@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **agent-os-profile-critique** — Add scope note to the "Common audit findings" table in `references/standards.md` so the three `index.yml`-related rows are clearly marked Target B only. Profile source dirs (Target A) and enterprise profile repos (Target C) no longer get a spurious blocking finding for a missing `index.yml` when the model lands on this reference. ([#26](https://github.com/psenger/ai-agent-skills/issues/26))
+
 ## [1.4.0] - 2026-05-14
 
 ### Changed
