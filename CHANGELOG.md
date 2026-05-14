@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-05-14
+
 ### Removed
 
-- **agent-os-assist** — Remove the skill. It was reference documentation packaged as a `SKILL.md` rather than a procedural skill: no audit-style procedure, no structured output, and references that described how Agent OS works instead of driving a workflow. Triggered too broadly (any mention of Agent OS), duplicated five of its eight reference files with `agent-os-profile-critique`, and set a precedent for documentation-as-skill that diluted the marketplace. Users wanting Agent OS reference should consult the Builder Methods documentation; `agent-os-profile-critique` retains the load-bearing v3 facts it needs for audits. ([#30](https://github.com/psenger/ai-agent-skills/issues/30))
+- **agent-os-assist** — Remove the skill. It was reference documentation packaged as a `SKILL.md` rather than a procedural skill: no audit-style procedure, no structured output, and references that described how Agent OS works instead of driving a workflow. Triggered too broadly (any mention of Agent OS), duplicated five of its eight reference files with `agent-os-profile-critique`, and set a precedent for documentation-as-skill that diluted the marketplace. Users wanting Agent OS reference should consult the Builder Methods documentation; `agent-os-profile-critique` retains the load-bearing v3 facts it needs for audits. **Breaking change for any marketplace consumer that depended on `agent-os-assist`** — install `agent-os-profile-critique` instead if Agent OS coverage is required. ([#30](https://github.com/psenger/ai-agent-skills/issues/30))
 
 ## [1.4.1] - 2026-05-14
 
@@ -113,7 +115,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **git-commit-pr-message** — Git commit, PR, and changelog workflow skill
 - Initial project structure and README
 
-[Unreleased]: https://github.com/psenger/ai-agent-skills/compare/v1.4.1...HEAD
+[Unreleased]: https://github.com/psenger/ai-agent-skills/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/psenger/ai-agent-skills/compare/v1.4.1...v2.0.0
 [1.4.1]: https://github.com/psenger/ai-agent-skills/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/psenger/ai-agent-skills/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/psenger/ai-agent-skills/compare/v1.3.0...v1.3.1
