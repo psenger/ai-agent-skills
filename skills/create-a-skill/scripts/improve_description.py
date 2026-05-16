@@ -17,7 +17,7 @@ from pathlib import Path
 from scripts.utils import parse_skill_md
 
 
-def _call_claude(prompt: str, model: str | None, timeout: int = 300) -> str:
+def _call_claude(prompt: str, model: str | None, timeout: int = 300, bare: bool = False) -> str:
     """Run `claude -p` with the prompt on stdin and return the text response.
 
     Prompt goes over stdin (not argv) because it embeds the full SKILL.md
@@ -26,6 +26,8 @@ def _call_claude(prompt: str, model: str | None, timeout: int = 300) -> str:
     cmd = ["claude", "-p", "--output-format", "text"]
     if model:
         cmd.extend(["--model", model])
+    if bare:
+        cmd.append("--bare")
 
     # Remove CLAUDECODE env var to allow nesting claude -p inside a
     # Claude Code session. The guard is for interactive terminal conflicts;
@@ -57,6 +59,7 @@ def improve_description(
     test_results: dict | None = None,
     log_dir: Path | None = None,
     iteration: int | None = None,
+    bare: bool = False,
 ) -> str:
     """Call Claude to improve the description based on eval results."""
     failed_triggers = [
@@ -141,7 +144,7 @@ I'd encourage you to be creative and mix up the style in different iterations si
 
 Please respond with only the new description text in <new_description> tags, nothing else."""
 
-    text = _call_claude(prompt, model)
+    text = _call_claude(prompt, model, bare=bare)
 
     match = re.search(r"<new_description>(.*?)</new_description>", text, re.DOTALL)
     description = match.group(1).strip().strip('"') if match else text.strip().strip('"')
@@ -171,7 +174,7 @@ Please respond with only the new description text in <new_description> tags, not
             f"important trigger words and intent coverage. Respond with only "
             f"the new description in <new_description> tags."
         )
-        shorten_text = _call_claude(shorten_prompt, model)
+        shorten_text = _call_claude(shorten_prompt, model, bare=bare)
         match = re.search(r"<new_description>(.*?)</new_description>", shorten_text, re.DOTALL)
         shortened = match.group(1).strip().strip('"') if match else shorten_text.strip().strip('"')
 
@@ -197,6 +200,7 @@ def main():
     parser.add_argument("--skill-path", required=True, help="Path to skill directory")
     parser.add_argument("--history", default=None, help="Path to history JSON (previous attempts)")
     parser.add_argument("--model", required=True, help="Model for improvement")
+    parser.add_argument("--bare", action="store_true", help="Pass --bare to claude -p so auth comes from ANTHROPIC_API_KEY env var instead of ~/.claude/sessions")
     parser.add_argument("--verbose", action="store_true", help="Print thinking to stderr")
     args = parser.parse_args()
 
@@ -224,6 +228,7 @@ def main():
         eval_results=eval_results,
         history=history,
         model=args.model,
+        bare=args.bare,
     )
 
     if args.verbose:

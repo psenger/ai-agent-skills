@@ -16,11 +16,9 @@ Agent OS v3 was released January 2026. The differences below matter for migratio
 
 ## Migrating from v2
 
-1. Remove v2 artifacts:
-   ```bash
-   rm -rf .claude/agents/agent-os/
-   rm -rf .claude/commands/agent-os/
-   ```
+1. Remove v2 artifacts. After verifying the contents you expect, delete these two directories from the project (use your file manager, IDE, or a familiar shell command — guidance intentionally non-executable so contents are reviewed before deletion):
+   - `.claude/agents/agent-os/`
+   - `.claude/commands/agent-os/`
 2. Reinstall v3 commands without disturbing standards:
    ```bash
    ~/agent-os/scripts/project-install.sh --commands-only
