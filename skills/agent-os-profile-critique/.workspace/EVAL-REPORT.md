@@ -11,15 +11,21 @@ the suite is executed.
 - `skills/agent-os-profile-critique/.workspace/evals/trigger-evals.json` — 15 queries
 - `skills/agent-os-profile-critique/.workspace/evals/evals.json` — 1 functional case
 - `skills/agent-os-profile-critique/.workspace/evals/files/v2-profile/` — fixture for case 1
+- `skills/agent-os-profile-critique/.workspace/run-trigger-eval.sh` — sandboxed runner
+- `skills/agent-os-profile-critique/.workspace/summarize_eval.py` — results summarizer
 
 ## Trigger evals
 
 Tests whether the skill description activates on the right prompts and stays quiet on
 the wrong ones. Target: 95% (14/15).
 
+The runner sandboxes `HOME` to a `mktemp -d` directory so the user's real installation directory
+is never read or modified. Auth flows through `ANTHROPIC_API_KEY` (the engine passes
+`--bare` to every `claude -p` subprocess via `create-a-skill`'s `--bare-claude` flag).
+
 Run (from repo root):
 ```bash
-bash skills/agent-os-profile-critique/.workspace/run-trigger-eval.sh
+ANTHROPIC_API_KEY=sk-... bash skills/agent-os-profile-critique/.workspace/run-trigger-eval.sh
 ```
 
 ### Should-trigger queries (3)
