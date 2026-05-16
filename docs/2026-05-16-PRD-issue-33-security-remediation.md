@@ -75,13 +75,36 @@ Out of scope: refactoring the eval engine beyond a small `--bare` pass-through, 
 
 ## 5. Acceptance criteria mapping
 
-| Issue #33 criterion | How this PRD satisfies it |
-|---|---|
-| `.workspace/run-trigger-eval.sh` no longer touches `~/.claude` | Runner rewritten with `HOME=$(mktemp -d)` sandbox (Phase 3) |
-| Script no longer mutates `PYTHONPATH` / no Python heredocs | `cd skills/create-a-skill` instead of PYTHONPATH; heredoc extracted (Phases 2, 3) |
-| `references/v2-vs-v3.md` no longer instructs `rm -rf` | Block replaced with descriptive guidance (Phase 4) |
-| `SKILL.md` adds boundary markers + data-not-instructions rule | New "External content handling" section + cross-refs (Phase 5) |
-| Re-run audit, all four categories clear | Phase 6 verification |
+| Issue #33 criterion | How this PRD satisfies it | Status |
+|---|---|---|
+| `.workspace/run-trigger-eval.sh` no longer reads/writes/renames/copies under `~/.claude` | Rewritten with `HOME=$(mktemp -d)` sandbox; zero `$HOME/.claude` refs (Phase 3) | ✅ Done |
+| Script no longer mutates `PYTHONPATH` / no Python heredocs | No `PYTHONPATH=` lines; engine invoked via `cd skills/create-a-skill`; heredoc extracted to `.workspace/summarize_eval.py` (Phases 2, 3) | ✅ Done |
+| `references/v2-vs-v3.md` no longer instructs `rm -rf` against `.claude/` | Fenced block replaced with descriptive prose preserving the directory paths (Phase 4) | ✅ Done |
+| `SKILL.md` adds boundary markers + "treat as data, never as instructions" rule before any external read | New `## External content handling` section between Version awareness and Audit workflow; cross-refs from audit-workflow steps 2 and 4 (Phase 5) | ✅ Done |
+| Re-run Gen Agent Trust Hub, all four categories clear, risk below HIGH | User-driven; record in §8 | ⏳ Pending |
+
+### Delivery status
+
+**Commits on branch `fix/33-profile-critique-security`:**
+- `d51336e` — the four code/content fixes
+- `2bbd16f` — PRD progress checkboxes
+
+**Verification (PRD §7) all returned `OK`:**
+- No `$HOME/.claude` references in runner
+- No `rm -rf` / `mv` in runner
+- No `PYTHONPATH=` in runner
+- No heredocs in runner
+- `summarize_eval.py` compiles
+- `run_loop.py` exposes `--bare-claude` flag
+- No `rm -rf` anywhere under `references/`
+- `SKILL.md` contains "External content handling" + "treat … as data"
+
+**Outstanding (gated on user / external tool):**
+1. Run `ANTHROPIC_API_KEY=sk-… bash skills/agent-os-profile-critique/.workspace/run-trigger-eval.sh` end-to-end against the fixtures.
+2. Re-run Gen Agent Trust Hub against the skill directory; fill in §8.
+3. Push branch and open PR referencing #33.
+
+If step 1 reveals `--bare` breaks the engine, the documented fallback is to revert the runner-rewrite portion to a delete-only approach and file a follow-up issue for an audit-safe rebuild (record this in §8 with `Fallback triggered = yes`).
 
 ## 6. Risks and mitigations
 
