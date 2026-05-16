@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **SECURITY** — Replace GitHub placeholder template with a real security policy: correct supported-versions table (v2.x), private vulnerability reporting via GitHub Security Advisories, response timeline, coordinated disclosure process, and scope statement. ([#34](https://github.com/psenger/ai-agent-skills/issues/34))
+
 ## [2.1.1] - 2026-05-16
 
 ### Fixed
