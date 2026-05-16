@@ -32,7 +32,7 @@
       "name": "create-a-skill",
       "source": "./skills/create-a-skill",
       "description": "Create new agent skills from scratch, modify and improve existing skills, and measure skill performance through evaluation and benchmarking. Use when users want to create a skill, write a skill, build a new skill, edit or optimize an existing skill, run evals to test a skill, benchmark skill performance, or optimize a skill's description for better triggering accuracy. Also triggers when users say \"turn this into a skill\", \"make a skill for X\", \"skill for doing Y\", or ask about skill structure, skill format, or SKILL.md files.",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     {
       "name": "handoff",
@@ -44,7 +44,7 @@
       "name": "agent-os-profile-critique",
       "source": "./skills/agent-os-profile-critique",
       "description": "Provides the audit checklists, severity criteria (blocking/warning/suggestion), and artifact patterns needed to properly review Agent OS profiles and standards.",
-      "version": "1.2.1"
+      "version": "1.2.2"
     }
   ]
 }

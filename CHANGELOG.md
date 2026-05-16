@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.1] - 2026-05-16
+
+### Fixed
+
+- **agent-os-profile-critique** — Clear four HIGH-risk findings from the Gen Agent Trust Hub audit (2026-05-11). Runner uses a `mktemp -d` sandboxed `HOME` with `claude -p --bare` auth so the user's `~/.claude` directory is never read, written, renamed, or copied. Python heredoc extracted to a standalone `summarize_eval.py` and `PYTHONPATH` mutation removed. `references/v2-vs-v3.md` no longer documents `rm -rf` against `.claude` directories. `SKILL.md` adds an "External content handling" section with boundary markers and a treat-as-data rule, cross-referenced from audit-workflow steps that read external files. ([#33](https://github.com/psenger/ai-agent-skills/issues/33))
+
+### Changed
+
+- **create-a-skill** — Add additive `--bare-claude` CLI flag to `scripts/run_loop.py` (with matching `--bare` flag on `run_eval.py` and `improve_description.py`) so eval runs in a sandboxed `HOME` can authenticate via `ANTHROPIC_API_KEY` instead of `~/.claude/sessions`. Default off; existing callers unaffected. ([#33](https://github.com/psenger/ai-agent-skills/issues/33))
+
 ## [2.0.0] - 2026-05-14
 
 ### Removed
@@ -115,7 +125,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **git-commit-pr-message** — Git commit, PR, and changelog workflow skill
 - Initial project structure and README
 
-[Unreleased]: https://github.com/psenger/ai-agent-skills/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/psenger/ai-agent-skills/compare/v2.0.1...HEAD
+[2.0.1]: https://github.com/psenger/ai-agent-skills/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/psenger/ai-agent-skills/compare/v1.4.1...v2.0.0
 [1.4.1]: https://github.com/psenger/ai-agent-skills/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/psenger/ai-agent-skills/compare/v1.3.1...v1.4.0
