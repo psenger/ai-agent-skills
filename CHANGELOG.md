@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **github** — Convert bug and feature request issue templates to GitHub issue forms (`.yml`) with required-field validation, add `config.yml` to disable blank issues and surface security advisory and Discussions contact links, and add a documentation issue form. ([#36](https://github.com/psenger/ai-agent-skills/issues/36))
+
 ## [2.0.1] - 2026-05-16
 
 ### Fixed
