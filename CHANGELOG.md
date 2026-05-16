@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **CODE_OF_CONDUCT** — Replace broken "issue." placeholder with a link to open a GitHub issue so reporters have a real, reachable enforcement contact. ([#35](https://github.com/psenger/ai-agent-skills/issues/35))
+
 ## [2.1.0] - 2026-05-16
 
 ### Added
