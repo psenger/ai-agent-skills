@@ -1,0 +1,64 @@
+name: Bug Report
+description: Report incorrect or unexpected skill behaviour
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What Happened
+      description: Describe what the skill did that it shouldn't have, or failed to do.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What Was Expected
+      description: Describe what correct behaviour looks like.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      placeholder: |
+        1. Install skill: `skill-name`
+        2. Invoke with prompt: `...`
+        3. Observe: ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      placeholder: |
+        - [ ] Given [the trigger prompt], when the skill runs, then [correct behaviour]
+        - [ ] Given [edge case], when the skill runs, then [correct behaviour]
+    validations:
+      required: true
+
+  - type: input
+    id: skill-version
+    attributes:
+      label: Skill Version / Commit
+      placeholder: e.g. v1.0.0 or short sha
+
+  - type: input
+    id: claude-model
+    attributes:
+      label: Claude Model
+      placeholder: e.g. claude-sonnet-4-6
+
+  - type: input
+    id: tool
+    attributes:
+      label: Tool
+      placeholder: e.g. Claude Code CLI, claude.ai
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Transcript snippets, screenshots, or related issues.

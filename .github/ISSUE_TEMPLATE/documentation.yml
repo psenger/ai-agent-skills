@@ -1,0 +1,31 @@
+name: Documentation Issue
+description: Report missing, incorrect, or unclear documentation
+labels: ["documentation"]
+body:
+  - type: textarea
+    id: what-is-wrong
+    attributes:
+      label: What Is Wrong or Missing
+      description: Describe the documentation problem.
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: File path or skill name where the documentation issue exists.
+      placeholder: e.g. skills/vault-scribe/SKILL.md or README.md
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggested-fix
+    attributes:
+      label: Suggested Fix
+      description: What should the documentation say instead?
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
