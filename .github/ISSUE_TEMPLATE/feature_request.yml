@@ -1,0 +1,36 @@
+name: Feature Request
+description: Propose a new skill or capability enhancement
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: user-story
+    attributes:
+      label: User Story
+      placeholder: |
+        As a [type of user — developer, AI agent, contributor],
+        I want [capability or feature],
+        so that [the benefit or outcome].
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      placeholder: |
+        - [ ] Given [context or precondition], when [action is taken], then [expected outcome]
+        - [ ] Given [context or precondition], when [action is taken], then [expected outcome]
+    validations:
+      required: true
+
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of Scope
+      description: What this feature explicitly does NOT cover.
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Screenshots, references, related issues, or anything else relevant.
